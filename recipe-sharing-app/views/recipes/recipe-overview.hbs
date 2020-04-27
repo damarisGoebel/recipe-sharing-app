@@ -1,0 +1,16 @@
+<h1>Here are all the recipes</h1>
+
+
+<a href='/recipes/new'> Add a new recipe</a>
+  
+<ul>
+  {{#each recipes}}
+  <li> <a href='/recipes/{{this.id}}'> {{this.title}}</a></li>
+
+   <form action="/recipes/{{this.id}}/edit" method="get"><button type="submit">EDIT</button></form>
+
+    <form action="/recipes/{{this.id}}/delete" method="post"><button type="submit">DELETE</button></form>
+
+
+  {{/each}} 
+</ul> 

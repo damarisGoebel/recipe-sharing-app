@@ -37,6 +37,7 @@ Extras maybe:
 - Users could be following other users or being followers.
 - Picture-Reader - Users don't need to type anything.
 - Translate the site into German ? 
+- grocery list 
 
 
 

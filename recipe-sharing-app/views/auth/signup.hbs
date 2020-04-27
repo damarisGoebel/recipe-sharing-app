@@ -1,0 +1,25 @@
+<h2>Welcome to our amazing community for recipe sharing</h2>
+<h3>Finding and Sharing good recipes</h3>
+
+{{!-- Add E-Mail to the form  && Social Login with Facebook--}}
+
+<form action="/signup" method="POST" id="form-container">
+  <label for="username">Username</label>
+  <input id="username" type="text" name="username" placeholder="Your amazing name">
+  <br><br>
+  <label for="password">Password</label>
+  <input id="password" type="password" name="password" placeholder="Your safe password">
+
+  {{#if message}}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+  <br><br>
+
+  <button type="submit">Create account</button>
+
+  <p>
+    Do you already have an account?
+    <a href="/login">Login</a>
+  </p>
+  
+</form>
