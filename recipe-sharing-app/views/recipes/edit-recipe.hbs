@@ -1,17 +1,25 @@
-<h2>Change the recipes' details</h2>
+<h2>Edit your recipe</h2>
+
+<ul>
+<form action="/recipes/{{this.id}}/delete" method="post"><button type="submit">Delete this recipe</button></form>
+</ul>
 
 <form action="/recipes/{{recipe.id}}/edit" method="post">
   <label for="">Title:</label>
   <input type="text" name="title" value="{{recipe.title}}">
 
-  <label for="">Image:</label>
-    <input type="text" name="image" value="{{recipe.image}}">
-
   <label for="">Ingredrients:</label>
   <input type="text" name="ingredients" value="{{recipe.ingredients}}">
+
+ <label for="">Directions:</label>
+  <input type="text" name="directions" value="{{recipe.directions}}">
+
+ <label for="">Duration:</label>
+  <input type="number" name="duration" value="{{recipe.duration}}">
 
   <button type="submit">CHANGE</button>
 </form>
 
 
-<a href='/recipe-overview'> Go back to all the recipes</a>
+
+<a href="http://localhost:3000/rezepte"> Go back to all the recipes</a>

@@ -8,6 +8,9 @@ const userSchema = new Schema(
     //     required: true},
 
     password: String,
+    googleID: String, 
+    facebookId: String
+
   },
   {
     timestamps: {

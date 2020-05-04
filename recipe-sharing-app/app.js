@@ -13,6 +13,8 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 
 const User = require('./models/User.model');
 
@@ -72,6 +74,50 @@ passport.use(
   })
 );
 
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: "651444938778-nmij1ldot505ech0ha6n2olqr81fu4ch.apps.googleusercontent.com",
+      clientSecret: "PoHDL3si63vb_qZTMY6bYvno",
+      callbackURL: "/auth/google/callback"
+    },
+    (accessToken, refreshToken, profile, done) => {
+      // to see the structure of the data in received response:
+      console.log("Google account details:", profile);
+ 
+      User.findOne({ googleID: profile.id })
+        .then(user => {
+          if (user) {
+            done(null, user);
+            return;
+          }
+ 
+          User.create({ googleID: profile.id, username: profile.name.givenName})
+            .then(newUser => {
+              done(null, newUser);
+            })
+            .catch(err => done(err)); // closes User.create()
+        })
+        .catch(err => done(err)); // closes User.findOne()
+    }
+  )
+);
+
+passport.use(new FacebookStrategy({
+  clientID: "233835407834519",
+  clientSecret: "4d343cd77196be686cd69214bc24966c",
+  callbackURL: "http:localhost:3000/auth/facebook/callback"
+},
+function(accessToken, refreshToken, profile, cb) {
+  User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    return cb(err, user);
+  });
+}
+));
+
+
+
 // Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -81,13 +127,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// Express View engine setup
-
-app.use(require('node-sass-middleware')({
-  src:  path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  sourceMap: true
-}));
       
 
 app.set('views', path.join(__dirname, 'views'));
@@ -108,8 +147,8 @@ app.use('/', index);
 const auth = require('./routes/auth.routes');
 app.use('/', auth);
 
-const recipe = require('./routes/recipe.routes');
-app.use('/', recipe);
+const recipes = require('./routes/recipe.routes');
+app.use('/rezepte', recipes);
 
 
 module.exports = app;

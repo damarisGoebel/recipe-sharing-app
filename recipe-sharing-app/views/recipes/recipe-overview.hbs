@@ -1,16 +1,26 @@
-<h1>Here are all the recipes</h1>
+<h2>Übersicht über alle Rezepte</h2>
 
 
-<a href='/recipes/new'> Add a new recipe</a>
-  
-<ul>
+<div class="cuisine">
+  {{#each cuisine}}
+<button>{{this}}</button>
+  {{/each}}
+</div>
+
+
+<div class="container">
+<div class="row align-items-start">
+
   {{#each recipes}}
-  <li> <a href='/recipes/{{this.id}}'> {{this.title}}</a></li>
+  <div class="col-4 recipe-card">
+<img src="{{this.image}}" >  
+  <a href='/rezepte/{{this.id}}'> {{this.title}}</a>
 
-   <form action="/recipes/{{this.id}}/edit" method="get"><button type="submit">EDIT</button></form>
+</div>  
+  {{/each}}
 
-    <form action="/recipes/{{this.id}}/delete" method="post"><button type="submit">DELETE</button></form>
+</div>  
+</div>
 
 
-  {{/each}} 
-</ul> 
+<a href='/rezepte/neu'> Neues Rezept eingeben</a>

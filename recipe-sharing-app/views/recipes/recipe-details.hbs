@@ -1,3 +1,22 @@
 <h1>Recipe Detail Page</h1>
-<h2>Recipe Title</h2>
+<img src="{{this.image}}" alt="Example" height="500" width="500">
+
+<h1>{{this.title}}</h1>
+
+{{!-- Duration / Level / Bewertungen --}}
+
+<h2>Zutaten:</h2>
+<p>{{this.ingredients}}</p>
+
+<h2>Zubereitung:</h2>
+<h2>{{this.directions}}</h2>
+
+
+<a href='/recipes/{{this.id}}/edit'> Edit this recipe</a>
+
+<form action="/recipes/{{this.id}}/delete" method="post"><button type="submit">Delete this recipe</button></form>
+
+
+{{!-- <a href='/recipes/{{this.id}}/delete'> Delete this recipe</a> --}}
+
 

@@ -29,18 +29,17 @@ ratingAverage: Number,
 
 cuisine: {
     type: String,
-  required: true
   },
 
 dishType: {
     type: String,
     enum: ['breakfast','lunch','dinner','soup', 'snack', 'drink', 'dessert','other']
-}
+},
 
-// images: [{
-//         url: String,
-//         text: String
-//     }],
+image: {
+        url: String,
+// default: "https://images.media-allrecipes.com/images/75131.jpg"
+    },
 
 
 // duration: {
