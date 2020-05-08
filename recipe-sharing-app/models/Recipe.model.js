@@ -36,6 +36,8 @@ dishType: {
     enum: ['breakfast','lunch','dinner','soup', 'snack', 'drink', 'dessert','other']
 },
 
+portions : Number,
+
 image: {
         url: String,
 // default: "https://images.media-allrecipes.com/images/75131.jpg"

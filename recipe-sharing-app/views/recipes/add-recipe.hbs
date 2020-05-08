@@ -1,22 +1,29 @@
-<h1>Add a new recipe</h1>
+<h1>Neues Rezept hochladen</h1>
 
 
 
-<form action="/recipes" method="post">
-  <label for="">Title:</label>
+<form action="/rezepte" method="post" enctype="multipart/form-data">
+  <label for="">Titel:</label>
   <input type="text" name="title">
 
-  <label for="">Ingredients:</label>
+     <label>Bilder</label>
+  <input type="file" name="photo">
+
+  <label for="">Zutaten:</label>
     <input type="text" name="ingredients">
 
-  <label for="">Directions:</label>
+  <label for="">Zubereitung:</label>
   <input type="text" name="directions">
 
-  <label for="">Duration:</label>
+  <label for="">Arbeitszeit:</label>
   <input type="number" name="duration">
 
-  <button type="submit">Add a new Recipe</button>
-  <p> Don't worry if you forget sth. You can edit it later.</p>
+   <label for="">Schwierigkeitslevel:</label>
+  <input type="text" name="level">
+
+
+  <button type="submit">Neues Rezept hochladen</button>
+  <p> Keine Sorge. Du kannst das Rezept später noch anpassen, wenn du etwas vergessen hast.</p>
 </form>
 
-<a href="http://localhost:3000/rezepte"> Go back to all the recipes</a>
+<a href="http://localhost:3000/rezepte"> Zurück zu allen Rezepten</a>

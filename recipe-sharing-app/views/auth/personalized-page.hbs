@@ -1,15 +1,23 @@
 <div>private page</div>
 <a href="/">Abmelden</a>
 
-    <h1>Hello Chef {{ user.username}} </h1>
+<h1>Hello Chef {{ user.username}} </h1>
 
- <div class="row">
-    <div class="col-sm">col-sm</div>
-    <div class="col-sm">col-sm</div>
-    <div class="col-sm">col-sm</div>
-  </div>
+<div class="row">
+  <div class="col-sm">col-sm</div>
+  <div class="col-sm">col-sm</div>
+  <div class="col-sm">col-sm</div>
+</div>
 </div>
 
+<h1>Flash messages</h1>
+{{#each messages}}
+<p>{{this}}</p>
+{{/each}}
+
+{{#unless verifiedEmail}}
+Hey du Tröte, verify your email !
+{{/unless}}
 
 
 

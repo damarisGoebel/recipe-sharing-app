@@ -12,6 +12,9 @@
 {{!-- Add E-Mail to the form  && Social Login with Facebook--}}
 
 <form action="/signup" method="POST" id="form-container">
+ <label for="email">E-Mail</label>
+  <input id="email" type="email" name="email" placeholder="Email">
+  <br><br>
   <label id="input-text"for="username">Benutzername</label> <br>
   <input id="username" type="text" name="username" placeholder="Benutzername">
   <br><br>
@@ -21,6 +24,9 @@
   <label id="input-text" for="password">Passwort</label> <br>
   <input id="password" type="password" name="password" placeholder="Passwort">
 
+
+
+
   {{#if message}}
     <div class="error-message">{{ message }}</div>
   {{/if}}
@@ -29,7 +35,6 @@
   <button id="btn-signup" type="submit">Jetzt registrieren</button>
 <br>
 <a href="/auth/google">Registrieren mit Google</a> <br>
-<a href="/auth/facebook">Registrieren mit Facebook</a>
 
 
 

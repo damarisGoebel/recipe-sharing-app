@@ -3,13 +3,16 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
+    email: String,
     username: String,
     // email:  {type: mongoose.SchemaTypes.Email,
     //     required: true},
 
     password: String,
     googleID: String, 
-    facebookId: String
+    verifiedEmail: { type: Boolean, default: false },
+    token: String
+
 
   },
   {

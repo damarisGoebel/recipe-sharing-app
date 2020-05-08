@@ -3,15 +3,21 @@ const router = express.Router();
 
 const Recipes = require('../models/Recipe.model');
 
+const uploadCloud = require('../config/cloudinary.js');
+
 router.get('/', (req, res, next) => {
   Recipes.find().then((data) => {
     console.log('All my recipes:' + data + '========> recipeData');
     let uniqueCuisine = [];
-    data.forEach(x => {
-      if(!uniqueCuisine.includes(x.cuisine))
-      {  uniqueCuisine.push(x.cuisine) }
+    data.forEach((x) => {
+      if (!uniqueCuisine.includes(x.cuisine)) {
+        uniqueCuisine.push(x.cuisine);
+      }
     });
-    res.render('recipes/recipe-overview', { recipes: data, cuisine: uniqueCuisine });
+    res.render('recipes/recipe-overview', {
+      recipes: data,
+      cuisine: uniqueCuisine,
+    });
   });
 });
 
@@ -19,7 +25,7 @@ router.get('/neu', (req, res, next) => {
   res.render('recipes/add-recipe');
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', uploadCloud.single('photo'), (req, res, next) => {
   console.log('req.body', req.body);
 
   let recipe = new Recipes({
@@ -32,7 +38,7 @@ router.post('/', (req, res, next) => {
   recipe
     .save()
     .then(() => {
-      res.redirect('/recipes');
+      res.redirect('/rezepte');
     })
 
     .catch((error) => {
@@ -50,7 +56,6 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
-
 router.get('/:id/bearbeiten', (req, res, next) => {
   Recipes.findById(req.params.id)
     .then((recipe) => {
@@ -64,35 +69,24 @@ router.get('/:id/bearbeiten', (req, res, next) => {
 // DELETE
 
 router.post('/:id/entfernen', (req, res) => {
-
-  console.log(req.params.id)
+  console.log(req.params.id);
 
   Recipes.findByIdAndDelete(req.params.id).then(() => {
-    res.redirect('/rezepte')
-  })
+    res.redirect('/rezepte');
+  });
+});
 
-})
+router.post('/:id/edit', (req, res, next) => {
+  console.log('req.body', req.body);
 
-
-
-
-router.post('/:id/edit', (req,res,next) => {
-
-    console.log("req.body", req.body)
-
-
-    Recipes.findByIdAndUpdate(req.params.id, {
-        title: req.body.title,
-        ingredients: req.body.ingredients,
-        directions: req.body.directions,
-        duration: req.body.duration
-      }).then(() => {
-        res.redirect('/recipes')
-      })
-    
-    })
-
-
-
+  Recipes.findByIdAndUpdate(req.params.id, {
+    title: req.body.title,
+    ingredients: req.body.ingredients,
+    directions: req.body.directions,
+    duration: req.body.duration,
+  }).then(() => {
+    res.redirect('/recipes');
+  });
+});
 
 module.exports = router;
