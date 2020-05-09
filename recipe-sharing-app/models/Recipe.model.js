@@ -14,9 +14,16 @@ level: {
     enum: ['Easy Peasy','Amateur Chef','UltraPro Chef'],
   },
 
- ingredients: [String],
-
- directions: [String],
+ ingredients: {
+     type: String,
+     required: true
+ }
+,
+ directions: {
+     type: String,
+     required: true
+ }
+ ,
 
 ratings: [{
 type: Number,
@@ -39,7 +46,7 @@ dishType: {
 portions : Number,
 
 image: {
-        url: String,
+        type: String,
 // default: "https://images.media-allrecipes.com/images/75131.jpg"
     },
 

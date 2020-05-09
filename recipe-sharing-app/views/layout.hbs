@@ -13,8 +13,10 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light">
-          <img class="logo" src="../images/logo1.png" alt="HelloCook">
-
+          
+          
+        <a class="logo" href="/"> <img class="logo" src="../images/shaker.svg" alt="HelloCook" width="50px">
+</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -22,11 +24,17 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">So funktioniert's <span class="sr-only">(current)</span></a>
-      </li>
+     
       <li class="nav-item">
         <a class="nav-link" href="/rezepte">Rezepte</a>
+      </li>
+
+       <li class="nav-item">
+        <a class="nav-link" href="/rezepte/neu">Rezept hochladen</a>
+      </li>
+
+         <li class="nav-item">
+        <a class="nav-link" href="/rezepte/neu">Favoriten</a>
       </li>
       {{!-- <li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">New Recipes</a>
@@ -35,7 +43,7 @@
        
      <form class="form-inline my-2 my-lg-0">
       {{!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> --}}
-      <a class="btn my-2 my-sm-0" href="http://localhost:3000/login" type="submit">Anmelden</a>
+      <a class="btn my-2 my-sm-0" href="http://localhost:3000/login" type="submit">Login</a>
     </form>   
     <form class="form-inline my-2 my-lg-0">
       {{!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> --}}

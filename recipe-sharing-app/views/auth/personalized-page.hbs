@@ -1,26 +1,32 @@
-<div>private page</div>
-<a href="/">Abmelden</a>
+<a id="loggingout" href="/">Abmelden</a>
 
-<h1>Hello Chef {{ user.username}} </h1>
+<h2>Willkomen {{ user.username}} bei HelloCook</h2>
 
-<div class="row">
-  <div class="col-sm">col-sm</div>
-  <div class="col-sm">col-sm</div>
-  <div class="col-sm">col-sm</div>
-</div>
-</div>
-
-<h1>Flash messages</h1>
+{{!-- <h1>Flash messages</h1> --}}
 {{#each messages}}
 <p>{{this}}</p>
 {{/each}}
 
 {{#unless verifiedEmail}}
-Hey du Tröte, verify your email !
+Bitte vergiss nicht, deine E-Mail Adresse zu verifizieren. Danke 💚
 {{/unless}}
 
 
+<div class="container"> 
+<div class="row align-items-start">
+    {{#each recipes}}
+  <div class="col-4 recipe-card" id="filteredRecipes">
+<img src="{{this.image}}" >  
+  <a href='/rezepte/{{this.id}}'> {{this.title}}</a>
 
-{{!-- Invite Friends --}}
+</div>  
+  {{/each}}
+</div>
+</div>
+
+
+
+
+
 {{!-- Nav-Bar with all recipes / favourites / add recipe  --}}
 {{!-- Latest Recipes --}}

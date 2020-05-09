@@ -6,6 +6,8 @@ const Recipes = require('../models/Recipe.model');
 const uploadCloud = require('../config/cloudinary.js');
 
 router.get('/', (req, res, next) => {
+  // const cuisine = req.query.cuisine
+  // const level = req.query.level
   Recipes.find().then((data) => {
     console.log('All my recipes:' + data + '========> recipeData');
     let uniqueCuisine = [];
@@ -21,15 +23,19 @@ router.get('/', (req, res, next) => {
   });
 });
 
+
+
 router.get('/neu', (req, res, next) => {
   res.render('recipes/add-recipe');
 });
 
 router.post('/', uploadCloud.single('photo'), (req, res, next) => {
   console.log('req.body', req.body);
+  console.log('req.file',req.file)
 
   let recipe = new Recipes({
     title: req.body.title,
+    image: req.file.url,
     ingredients: req.body.ingredients,
     directions: req.body.directions,
     duration: req.body.duration,

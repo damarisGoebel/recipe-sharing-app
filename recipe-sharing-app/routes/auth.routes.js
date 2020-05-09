@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/User.model');
+const Recipes = require('../models/Recipe.model')
 
 const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
@@ -51,12 +52,12 @@ router.post('/signup', (req, res, next) => {
 
   transporter
     .sendMail({
-      from: '"Willkommen bei HelloCook " <willkommen@hellocook.de>',
+      from: '"Willkommen bei HelloCook " <myawesome@project.com>',
       to: email,
       subject: 'Registrierungsbestätigung',
       text: `Guten Tag, vielen Dank für Ihre Registrierung
     Um Ihren Zugang zu bestätigen, klicken Sie einfach hier: http://localhost:3000/verify-email-link/${token}`,
-      html: `Um Ihren Zugang zu bestätigen, klicken Sie einfach hier: <a href="http://localhost:3000/verify-email-link/${token}">CLICK!</a>`,
+      html: `Um Ihren Zugang zu bestätigen, klicken Sie einfach: <a href="http://localhost:3000/verify-email-link/${token}">hier!</a>`,
     })
     .then(() => {
       const salt = bcrypt.genSaltSync(bcryptSalt);
@@ -82,7 +83,7 @@ router.get('/verify-email-link/:token', (req, res) => {
       // more professional : res.redirect and set a flash message before
       req.flash(
         'message',
-        'Sie haben ihren E-Mail erfolgreich verifiziertest.'
+        'Super! Du hast deine E-Mail erfolgreich verifiziert.'
       );
       res.redirect('/willkommen');
     });

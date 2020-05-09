@@ -19,6 +19,12 @@ https://www.100affen.de/
 
 */
 
+h1,h2,h3,h4 {
+  display: table;
+  text-align: center; 
+text-decoration: underline #688c32;
+font-family: "AlianzaSlab700", "Georgia", "Droid Serif", serif
+}
 
 body {
   font-family: Arial,Tahoma,sans-serif;
@@ -26,7 +32,7 @@ body {
  } 
 
 a {
-  color: #00B7FF; }
+  color: #537332; }
 
 .navbar {
   margin-bottom: 25px;
@@ -58,11 +64,18 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 #signup-box{
 
-  width: 350px;
+  width: 400px;
+  padding: 16px 16px;
+  border-left: 4px solid #688c32;
+  border-right: 1px solid #f2f2f2;
+  border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
+  border-radius: 5px;
 
 }
 
@@ -99,19 +112,47 @@ body.signup .navbar {
 }
 
 .recipe-card {
-
+  border: 1px solid #f2f2f2;
+padding: 0px;
+margin: 5px;
+border-radius: 5px;
 }
 
 
 .recipe-card img{
-  max-width: 100%;
+  width: 100%;
+  border-radius: 5px;
+height: 150px;
+
+
  
+ }
+
+ .recipe-txt {
+   font-weight: bold;
+   padding-right: 20px;
+   padding-left: 20px;
  }
 
  .cuisine {
    padding: 20px;
  }
 
+#title, #zutaten, #zubereitung {
+  width: 100%;
+}
+
+#zutaten, #zubereitung {
+  /* height: 200px; */
+}
+
+#loggingout {
+  text-align: right;
+}
+
+#rezepte {
+
+}
 /* .navbar {
   visibility:hidden; 
   display:none;

@@ -1,20 +1,40 @@
 <h2>Übersicht über alle Rezepte</h2>
 
+<a href='/rezepte/neu'> Neues Rezept eingeben</a>
 
+
+<p>Filtere nach Küche</p>
+<div class="filter-menu">
 <div class="cuisine">
   {{#each cuisine}}
-<button>{{this}}</button>
+<button id="cuisine" onclick="filterCuisine()">{{this}}</button>
   {{/each}}
 </div>
 
+</div>
 
-<div class="container">
+<div id="rezepte" class="container">
 <div class="row align-items-start">
 
   {{#each recipes}}
-  <div class="col-4 recipe-card">
-<img src="{{this.image}}" >  
+  <div class="col-4 recipe-card" id="">
+<div class="recipe-img"><img src="{{this.image}}"  >  </div>
+<div class="recipe-txt">
   <a href='/rezepte/{{this.id}}'> {{this.title}}</a>
+  </div>
+
+ <div class="recipe-duration">
+  <p> {{this.duration}} </p>
+  </div> 
+
+<div class="recipe-level">
+  <p> {{this.level}} </p>
+  </div>
+
+  <div class="recipe-cuisine">
+  <p> {{this.cuisine}} </p>
+  </div>
+
 
 </div>  
   {{/each}}
@@ -23,4 +43,3 @@
 </div>
 
 
-<a href='/rezepte/neu'> Neues Rezept eingeben</a>
