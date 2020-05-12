@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/User.model');
-const Recipes = require('../models/Recipe.model')
+const Recipe  = require('../models/Recipe.model')
 
 const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
@@ -54,8 +54,8 @@ router.post('/signup', (req, res, next) => {
     .sendMail({
       from: '"Willkommen bei HelloCook " <myawesome@project.com>',
       to: email,
-      subject: 'Registrierungsbestätigung',
-      text: `Guten Tag, vielen Dank für Ihre Registrierung
+      subject: 'Bitte bestätige deine Anmeldung',
+      text: `Guten Tag, vielen Dank für deine Anmeldung. Wir freuen uns, dass wir dich bei HelloCook begrüßen dürfen!
     Um Ihren Zugang zu bestätigen, klicken Sie einfach hier: http://localhost:3000/verify-email-link/${token}`,
       html: `Um Ihren Zugang zu bestätigen, klicken Sie einfach: <a href="http://localhost:3000/verify-email-link/${token}">hier!</a>`,
     })
@@ -90,6 +90,7 @@ router.get('/verify-email-link/:token', (req, res) => {
   }
 });
 
+// willkommen-seite
 router.get('/willkommen', (req, res) => {
   const messages = req.flash('message');
   const verifiedEmail = req.user.verifiedEmail;

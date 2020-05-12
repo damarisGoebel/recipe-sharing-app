@@ -19,11 +19,23 @@ https://www.100affen.de/
 
 */
 
-h1,h2,h3,h4 {
+h1 {
   display: table;
   text-align: center; 
-text-decoration: underline #688c32;
-font-family: "AlianzaSlab700", "Georgia", "Droid Serif", serif
+text-decoration: underline #537332;
+font-family: "AlianzaSlab700", "Georgia", "Droid Serif", serif;
+padding-top: 15px;
+padding-bottom:15px;
+}
+
+
+
+h2,h3,h4,h5{
+  display: table;
+  text-align: center; 
+font-family: "AlianzaSlab700", "Georgia", "Droid Serif", serif;
+padding-top: 15px;
+padding-bottom:15px;
 }
 
 body {
@@ -31,19 +43,30 @@ body {
   /* font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
  } 
 
+
 a {
   color: #537332; }
 
+
+/* navbar   */
 .navbar {
-  margin-bottom: 25px;
-  color:#c9d98f ;
+  margin-bottom: 35px;
+  color:#537332 ;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15)
 }
 
 .navbar .btn {
-  border:1px solid #a5bf45;
+  border:1px solid #537332;
 }
 
+.navbar-light .navbar-nav .nav-link {
+  color:#537332;
+}
 
+.navbar-light .navbar-nav .nav-link:hover {
+  background-color:#c9d98f;
+  
+}
 
 .logo {
   /* width: 250px; */
@@ -51,6 +74,27 @@ a {
 
 }
 
+/* index-page */
+#suche {
+  border:1px solid #dfe1e5;
+  border-radius: 6px;
+  width: 500px;
+  height: 30px;
+}
+
+#popular-recipe {
+  padding-top: 30px;
+}
+
+.col-3 {
+  text-align: center
+}
+
+.col-3 > img {
+  height: 30px;
+}
+
+/* signup/login */
 .form-inline {
   margin-right: 10px;
 }
@@ -71,7 +115,7 @@ a {
 
   width: 400px;
   padding: 16px 16px;
-  border-left: 4px solid #688c32;
+  border-left: 4px solid #537332;
   border-right: 1px solid #f2f2f2;
   border-top: 1px solid #f2f2f2;
   border-bottom: 1px solid #f2f2f2;
@@ -108,9 +152,12 @@ body.signup .navbar {
 }
 
 #btn-register {
-  background-color: #a5bf45;
+  background-color: #537332;
+  color: white;
 }
 
+
+/* recipe-overview-page  */
 .recipe-card {
   border: 1px solid #f2f2f2;
 padding: 0px;
@@ -122,7 +169,8 @@ border-radius: 5px;
 .recipe-card img{
   width: 100%;
   border-radius: 5px;
-height: 150px;
+/* height: 150px; */
+margin-bottom: 10px;
 
 
  
@@ -132,32 +180,94 @@ height: 150px;
    font-weight: bold;
    padding-right: 20px;
    padding-left: 20px;
+   color: #343434
  }
 
- .cuisine {
-   padding: 20px;
+ .recipe-duration, .recipe-level, .recipe-cuisine {
+  font-weight: 400;
+  line-height: 7px;
+  margin-top: 10px;
+  
  }
+
+/* recipe detail page */
+.recipe-meta {
+  margin: 20px 0px;
+  box-sizing: border-box;
+}
+
+.recipe-meta > span {
+  padding: 10px 20px;
+  background: hsla(0,0%,84.7%,.3);
+  border-radius: 8px;
+
+}
+
+li {
+  list-style-type: none;
+}
+
+#btn-rec-det {
+  color: #537332;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+	outline: inherit;
+
+}
+
+#comment-h2{
+  padding-bottom:0px;
+}
+
+#comment-form {
+  padding-top:0px;
+  margin-top:0px
+}
+
+
+
+textarea {
+  width: 100%;
+  border-radius: 5px;
+  border:1px solid #bbb9b9;
+}
+/* add-recipe-page */
+
 
 #title, #zutaten, #zubereitung {
   width: 100%;
 }
 
+#title {
+  border: 1px solid #ddd;
+  height: 40px;
+}
+
+h5 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+
 #zutaten, #zubereitung {
-  /* height: 200px; */
-}
-
-#loggingout {
-  text-align: right;
-}
-
-#rezepte {
+  border: 1px solid #ddd;
 
 }
-/* .navbar {
-  visibility:hidden; 
-  display:none;
+#btn-recipe-submit {
+  background-color: #537332;
+  color: white;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-right:auto;
+  margin-left:auto;
+}
 
-} */
+#select {
+  style:none;
+}
 
 
 /*# sourceMappingURL=style.css.map */

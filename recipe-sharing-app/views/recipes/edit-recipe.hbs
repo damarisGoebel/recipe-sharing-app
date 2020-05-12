@@ -1,25 +1,75 @@
-<h2>Edit your recipe</h2>
+<h2>Bearbeite das Rezept</h2>
 
-<ul>
-<form action="/recipes/{{this.id}}/delete" method="post"><button type="submit">Delete this recipe</button></form>
-</ul>
 
-<form action="/recipes/{{recipe.id}}/edit" method="post">
-  <label for="">Title:</label>
+<form action="/rezepte/{{recipe.id}}/bearbeiten" method="post">
+  <h5><label for="title">Rezeptname</label></h5>
   <input type="text" name="title" value="{{recipe.title}}">
+
+<h5>  <label>Bilder hochladen </label> </h5>
+<img src="{{recipe.image}}" height="250px">
+  <input type="file" name="photo">
+
+<br>
+
+<h5> <label  for="portions">Zutaten für </label></h5>
+  <input id="portions" type="number" name="portions" value="{{recipe.portions}}"> <p>Portionen</p>
+
+
+<h5> <label for="ingedients">Zutaten</label> </h5>
+{{!-- <textarea rows="10" cols="0" id="zutaten" type="text" name="ingredients" value="{{recipe.ingredients}}"></textarea> --}}
 
   <label for="">Ingredrients:</label>
   <input type="text" name="ingredients" value="{{recipe.ingredients}}">
 
+
+<h5><label for="directions">Zubereitung</label> </h5>
+
+{{!-- <textarea rows="10" cols="0" id="zubereitung" type="text" name="directions" value="{{recipe.directions}}"></textarea> --}}
+
+
  <label for="">Directions:</label>
   <input type="text" name="directions" value="{{recipe.directions}}">
 
- <label for="">Duration:</label>
-  <input type="number" name="duration" value="{{recipe.duration}}">
 
-  <button type="submit">CHANGE</button>
+ <h5> <label  for="duration">Zubereitungszeit</label></h5>
+  <input id="duration" type="text" name="duration" value="{{recipe.duration}}">  
+<br>
+ {{!-- <label for="">Duration:</label>
+  <input type="number" name="duration" value="{{recipe.duration}}"> --}}
+
+ <h5><label for="level">Schwierigkeitslevel</label> </h5>
+  <select id="level" name="level">
+    <option value="{{recipe.level}}"> {{recipe.level}}</option>
+    <option value="Easy Peasy">Easy Peasy</option>
+    <option value="Amateur Chef">Amateur Chef</option>
+    <option value="UltraPro Chef">UltraPro Chef</option>
+
+  </select>
+
+ <h5> <label  for="cuisine">Küche</label></h5>
+  <input id="küche" type="text" name="cuisine" value="{{recipe.cuisine}}">
+<br>
+
+<h5><label for="dishType">Gerichte</label> </h5>
+  <select id="gericht" name="dishType">
+    <option value="{{recipe.dishType}}">{{recipe.dishType}}</option>
+    <option value="Hauptspeise">Hauptspeise</option>
+    <option value="Vorspeise">Vorspeise</option>
+    <option value="Suppe">Suppe</option>
+    <option value="Frühstück">Frühstück</option>
+    <option value="Dessert">Dessert</option>
+    <option value="Salat">Salat</option>
+    <option value="Beilage">Beilage</option>
+    <option value="Spezielles">Spezielles</option>
+
+  </select>
+<br>
+
+  <button id="btn-recipe-submit" type="submit">Rezept bearbeiten</button>
 </form>
 
 
+<form  action="/rezepte/{{this.id}}/entfernen" method="post"><button id="btn-rec-det" type="submit">Lösche das Rezept</button></form>
 
-<a href="http://localhost:3000/rezepte"> Go back to all the recipes</a>
+
+<a href="http://localhost:3000/rezepte"> zurück zur Rezeptübersicht</a>

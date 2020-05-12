@@ -1,45 +1,71 @@
 <h2>Übersicht über alle Rezepte</h2>
 
-<a href='/rezepte/neu'> Neues Rezept eingeben</a>
+<a href='/rezepte/neu'> Du hast eine gute Rezeptidee? Erstelle jetzt ein Rezept und veröffentliche es auf HelloCook.</a>
 
+{{!-- Filter --}}
+<form action="/rezepte" method="get">
+  <label for="level">Schwierigkeitsgrad</label>
+  <select id="level" name="level">
+     <option value=''>All</option>
+    <option value="Easy Peasy">Easy Peasy</option>
+    <option value="Amateur Chef">Amateur Chef</option>
+    <option value="UltraPro Chef">UltraPro Chef</option>
 
-<p>Filtere nach Küche</p>
-<div class="filter-menu">
-<div class="cuisine">
-  {{#each cuisine}}
-<button id="cuisine" onclick="filterCuisine()">{{this}}</button>
-  {{/each}}
-</div>
+  </select>
+  <label for="cuisine">Küche</label>
+    <select id="cuisine" name="cuisine">
 
-</div>
+      <option value=''>All</option>
+      {{#each cuisine}}
+      <option value="{{this}}">{{this}}</option>
+      {{/each}}
 
+  </select>
+
+    <label for="dishType">Gericht</label>
+    <select id="dishType" name="dishType">
+
+      <option value=''>All</option>
+      {{#each dishType}}
+      <option value="{{this}}">{{this}}</option>
+      {{/each}}
+
+  </select>
+
+  {{!-- Here you can add as many filters as you want, the important thing is to name each one for example name = 'cuisine' --> This will give you access by doing req.query.cuisine--}}
+  <button type="submit">Filter</button>
+</form>
+
+<p>{{count}} Ergebnisse</p>
+
+{{!-- Rezepteübersicht --}}
 <div id="rezepte" class="container">
-<div class="row align-items-start">
-
-  {{#each recipes}}
-  <div class="col-4 recipe-card" id="">
-<div class="recipe-img"><img src="{{this.image}}"  >  </div>
-<div class="recipe-txt">
-  <a href='/rezepte/{{this.id}}'> {{this.title}}</a>
-  </div>
-
- <div class="recipe-duration">
-  <p> {{this.duration}} </p>
-  </div> 
-
-<div class="recipe-level">
-  <p> {{this.level}} </p>
-  </div>
-
-  <div class="recipe-cuisine">
-  <p> {{this.cuisine}} </p>
-  </div>
+  {{!-- <div class="row align-items-start"> --}}
+  <div class=" row d-flex justify-content-between">
 
 
-</div>  
-  {{/each}}
+    {{#each recipes}}
+    <div class="col-auto recipe-card" id="">
+      <div class="recipe-img"><img src="{{this.image}}"> </div>
+      <div class="recipe-txt">
+        <a href='/rezepte/{{this.id}}'> {{this.title}}</a>
+      </div>
 
-</div>  
+      <div class="recipe-duration recipe-txt">
+        <p> Zubereitungszeit: {{this.duration}} </p>
+      </div>
+
+      <div class="recipe-level recipe-txt">
+        <p> Schwierigkeitsgrad: {{this.level}} </p>
+      </div>
+
+      <div class="recipe-cuisine recipe-txt">
+        <p> Küche: {{this.cuisine}} </p>
+      </div>
+
+
+    </div>
+    {{/each}}
+
+  </>
 </div>
-
-

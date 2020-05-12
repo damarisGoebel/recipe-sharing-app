@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const recipeSchema = new Schema({
-
-title: {
+const recipeSchema = new Schema(
+    
+{title: {
     type: String,
     required: true,
     unique: true
@@ -15,12 +15,12 @@ level: {
   },
 
  ingredients: {
-     type: String,
+     type: Array,
      required: true
  }
 ,
  directions: {
-     type: String,
+     type: Array,
      required: true
  }
  ,
@@ -40,30 +40,34 @@ cuisine: {
 
 dishType: {
     type: String,
-    enum: ['breakfast','lunch','dinner','soup', 'snack', 'drink', 'dessert','other']
+    enum: ['Hauptspeise','Vorspeise','Suppe','Frühstück', 'Dessert', 'Salat', 'Beilage','Spezielles'],
+    required: true
 },
 
-portions : Number,
+portions: Number,
 
 image: {
-        type: String,
-// default: "https://images.media-allrecipes.com/images/75131.jpg"
+    type: String,
+    default: "https://res.cloudinary.com/dfx4shmcy/image/upload/v1589106164/folder-name/ausfallbild-img3_m5xdle.svg"
+},
+
+
+duration: String
+}
+,
+  {
+    timestamps: {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
     },
-
-
-// duration: {
-//     type: Number,
-//     min:0
-//  },
+  }
 
 // author: [{ type: Schema.Types.ObjectId, ref: 'User' }], // username - based on the UserID .populate()
-
-// timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
 
 
 // comments: [String]
 
-});
+);
 
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
