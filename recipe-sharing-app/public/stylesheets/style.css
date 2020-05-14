@@ -24,7 +24,7 @@ h1 {
   text-align: center; 
 text-decoration: underline #537332;
 font-family: "AlianzaSlab700", "Georgia", "Droid Serif", serif;
-padding-top: 15px;
+padding-top: 35px;
 padding-bottom:15px;
 }
 
@@ -620,7 +620,7 @@ h5 {
   border-radius: 5px;
   margin-right:auto;
   margin-left:auto;
-  width: 100%;
+  width: 50%;
   height: 50px;
 }
 
@@ -628,6 +628,9 @@ h5 {
   style:none;
 }
 
+.btn-add, .btn-edit {
+  text-align:center
+}
 
 /* personalized page */
 
@@ -666,7 +669,6 @@ h3 span {
 
 
 }
-
 
 
 /*# sourceMappingURL=style.css.map */

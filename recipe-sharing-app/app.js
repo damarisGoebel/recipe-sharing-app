@@ -20,9 +20,10 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./models/User.model');
 
 const MongoStore = require('connect-mongo')(session);
+const userTemplate = require('./config/user-template');
 
 mongoose
-  .connect('mongodb://localhost/recipe-sharing-app', { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then((x) => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
@@ -134,8 +135,10 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
+app.use(userTemplate)
 // default value for title local
 app.locals.title = 'HelloCook';
+// app.locals.user = req.user;
 
 const index = require('./routes/index.routes');
 app.use('/', index);

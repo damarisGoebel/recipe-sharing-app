@@ -71,6 +71,7 @@ router.get('/', (req, res, next) => {
       count: recipeCounter,
       nutrition: uniqueNutrition,
       dishType: uniqueDishtype,
+      user: req.user
     });
   });
 });

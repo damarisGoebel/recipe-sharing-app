@@ -22,6 +22,7 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
      
+    {{#if user}}
       <li class="nav-item">
         <a class="nav-link" href="/rezepte">Rezepte</a>
       </li>
@@ -29,6 +30,7 @@
        <li class="nav-item">
         <a class="nav-link" href="/rezepte/neu">Rezept hochladen</a>
       </li>
+      {{/if}}
     </ul>
        
      <form class="form-inline my-2 my-lg-0">
