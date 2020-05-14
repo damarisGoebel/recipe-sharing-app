@@ -20,9 +20,10 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        {{#if user}}
+
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
      
-    {{#if user}}
       <li class="nav-item">
         <a class="nav-link" href="/rezepte">Rezepte</a>
       </li>
@@ -30,15 +31,23 @@
        <li class="nav-item">
         <a class="nav-link" href="/rezepte/neu">Rezept hochladen</a>
       </li>
-      {{/if}}
+        <li class="nav-item">
+        <a class="nav-link" href="/willkommen">Willkommen</a>
+       </li>
+
     </ul>
+ 
+          {{else}}
+
        
-     <form class="form-inline my-2 my-lg-0">
+     <form class="form-inline ml-auto my-2 my-lg-0">
       <a class="btn my-2 my-sm-0" id="btn-login" href="http://localhost:3000/login" type="submit">Login</a>
     </form>   
     <form class="form-inline my-2 my-lg-0">
       <a class="btn my-2 my-sm-0" id="btn-register" href="/signup" type="submit">Registrieren</a>
     </form>
+          {{/if}}
+
   </div>
 </nav>
 

@@ -71,7 +71,7 @@ router.get('/', (req, res, next) => {
       count: recipeCounter,
       nutrition: uniqueNutrition,
       dishType: uniqueDishtype,
-      user: req.user
+      user: req.user,
     });
   });
 });
@@ -122,6 +122,8 @@ router.post('/', uploadCloud.single('photo'), (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   Recipe.findById(req.params.id)
     .then((data) => {
+      // let date = data.created_at.toString().slice(0,10);
+      // console.log('date', date);
       res.render('recipes/recipe-details', data);
     })
     .catch((error) => {
