@@ -67,6 +67,8 @@ const recipeSchema = new Schema(
     },
 
     duration: String,
+
+    author: String,
   },
   {
     timestamps: {

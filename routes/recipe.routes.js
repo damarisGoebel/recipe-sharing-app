@@ -94,6 +94,9 @@ router.post('/', uploadCloud.single('photo'), (req, res, next) => {
 
   let directions = req.body.directions.split('\n'); // split new line
 
+  let user = req.user.username;
+  console.log('Das ist der User', user)
+
   let recipe = new Recipe({
     title: req.body.title,
     image: image,
@@ -104,6 +107,7 @@ router.post('/', uploadCloud.single('photo'), (req, res, next) => {
     portions: req.body.portions,
     dishType: req.body.dishType,
     duration: req.body.duration,
+    author: user,
   });
 
   recipe

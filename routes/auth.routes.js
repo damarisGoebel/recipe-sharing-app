@@ -97,6 +97,7 @@ router.get('/willkommen', (req, res) => {
   const verifiedEmail = req.user.verifiedEmail;
 
   Recipe.find().then((data) => {
+
     const filteredData = data.filter((recipe) => {
       if (req.query.level && req.query.dishType && req.query.nutrition) {
         return (
@@ -147,6 +148,12 @@ router.get('/willkommen', (req, res) => {
       }
     });
 
+    
+
+    // let sortedRecipes = Recipe.find().then((data) =>  {
+    // }
+    // )
+
     res.render('auth/personalized-page', {
       user: req.user,
       messages: messages,
@@ -177,6 +184,9 @@ router.post(
   })
 );
 
-
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 module.exports = router;
