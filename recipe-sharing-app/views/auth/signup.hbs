@@ -7,39 +7,35 @@
  
 <h2>Willkommen bei HelloCook</h2>
 
-<p>Es erwarten dich wertvoll ausgewählte Rezepte. Du kannst Rezepte teilen, die dir richtig gut schmecken und neue Rezepte entdecken.</p>
+<p>Es erwarten dich wertvoll ausgewählte Rezepte. <br> Du kannst Rezepte teilen, die dir richtig gut schmecken <br> und neue Rezepte entdecken.</p>
 
 {{!-- Add E-Mail to the form  && Social Login with Facebook--}}
 
 <form action="/signup" method="POST" id="form-container">
- <label for="email">E-Mail</label>
-  <input id="email" type="email" name="email" placeholder="Email">
-  <br><br>
-  <label id="input-text"for="username">Benutzername</label> <br>
+ <label for="email"></label>
+  <input id="email" type="email" name="email" placeholder="E-Mail">
+ 
+  <label id="input-text"for="username"></label> <br>
   <input id="username" type="text" name="username" placeholder="Benutzername">
-  <br><br>
-  {{!-- <label for="email">E-Mail</label>
-  <input id="email" type="text" name="email" placeholder="E-Mail">
-  <br><br> --}}
-  <label id="input-text" for="password">Passwort</label> <br>
+
+  <label id="input-text" for="password"></label> <br>
   <input id="password" type="password" name="password" placeholder="Passwort">
-
-
 
 
   {{#if message}}
     <div class="error-message">{{ message }}</div>
   {{/if}}
-  <br><br>
+ 
 
   <button id="btn-signup" type="submit">Jetzt registrieren</button>
 <br>
+
 <a href="/auth/google">Registrieren mit Google</a> <br>
 
 
 
   <p>
-    Bereits Mitglied bei HelloCook?
+    Du hast bereits ein Konto?
     <a href="/login">Anmelden</a>
   </p>
   

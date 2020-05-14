@@ -1,57 +1,39 @@
-<h2>Bearbeite das Rezept</h2>
+<div class="edit-recipe">
+
+<h1>Bearbeite das Rezept</h1>
 
 
-<form action="/rezepte/{{recipe.id}}/bearbeiten" method="post">
-  <h5><label for="title">Rezeptname</label></h5>
-  <input type="text" name="title" value="{{recipe.title}}">
+<form action="/rezepte/{{recipe.id}}/bearbeiten" method="post" enctype="multipart/form-data">
+  <h5><label for="title">Rezeptname*</label></h5>
+  <input  id="title" type="text" name="title" value="{{recipe.title}}">
 
-<h5>  <label>Bilder hochladen </label> </h5>
-<img src="{{recipe.image}}" height="250px">
+  <h5> <label>Bilder hochladen </label> </h5>
+  <img src="{{recipe.image}}" height="250px">
+  <br>
+
   <input type="file" name="photo">
 
-<br>
-
-<h5> <label  for="portions">Zutaten für </label></h5>
-  <input id="portions" type="number" name="portions" value="{{recipe.portions}}"> <p>Portionen</p>
-
-
-<h5> <label for="ingedients">Zutaten</label> </h5>
-{{!-- <textarea rows="10" cols="0" id="zutaten" type="text" name="ingredients" value="{{recipe.ingredients}}"></textarea> --}}
-
-  <label for="">Ingredrients:</label>
-  <input type="text" name="ingredients" value="{{recipe.ingredients}}">
-
-
-<h5><label for="directions">Zubereitung</label> </h5>
-
-{{!-- <textarea rows="10" cols="0" id="zubereitung" type="text" name="directions" value="{{recipe.directions}}"></textarea> --}}
-
-
- <label for="">Directions:</label>
-  <input type="text" name="directions" value="{{recipe.directions}}">
-
-
- <h5> <label  for="duration">Zubereitungszeit</label></h5>
-  <input id="duration" type="text" name="duration" value="{{recipe.duration}}">  
-<br>
- {{!-- <label for="">Duration:</label>
-  <input type="number" name="duration" value="{{recipe.duration}}"> --}}
-
- <h5><label for="level">Schwierigkeitslevel</label> </h5>
-  <select id="level" name="level">
+<div class="row">
+  <div class="col-4 select-wrapper">
+  <h5><label for="level">Schwierigkeitslevel*</label> </h5>
+   <select id="edit-level" name="level">
     <option value="{{recipe.level}}"> {{recipe.level}}</option>
     <option value="Easy Peasy">Easy Peasy</option>
     <option value="Amateur Chef">Amateur Chef</option>
     <option value="UltraPro Chef">UltraPro Chef</option>
-
   </select>
+</div>
 
- <h5> <label  for="cuisine">Küche</label></h5>
-  <input id="küche" type="text" name="cuisine" value="{{recipe.cuisine}}">
-<br>
+<div class="col-4">
+  <h5> <label  for="duration">Zubereitungszeit</label></h5>
+  <input id="edit-duration" type="text" name="duration" value="{{recipe.duration}}">
+</div>
 
-<h5><label for="dishType">Gerichte</label> </h5>
-  <select id="gericht" name="dishType">
+
+
+<div class="col-4 select-wrapper">
+  <h5><label for="dishType">Gerichte*</label> </h5>
+  <select id="edit-gericht" name="dishType">
     <option value="{{recipe.dishType}}">{{recipe.dishType}}</option>
     <option value="Hauptspeise">Hauptspeise</option>
     <option value="Vorspeise">Vorspeise</option>
@@ -61,15 +43,57 @@
     <option value="Salat">Salat</option>
     <option value="Beilage">Beilage</option>
     <option value="Spezielles">Spezielles</option>
+  </select>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-4">
+<h5> <label  for="nutrition">Ernährung</label></h5>
+<select id="edit-nutrition" name="nutrition">
+    <option value="{{recipe.nutrition}}">{{recipe.nutrition}}</option>
+    <option value="vegan">vegan</option>
+    <option value="vegetarisch">vegetarisch</option>
+    <option value="mit Fleisch">mit Fleisch</option>
+    <option value="mit Fisch">mit Fisch</option>
 
   </select>
+</div>
+
+  <div class="col-4">
+  <h5> <label for="portions">Zutaten für Portionen:</label></h5>
+  <input id="edit-portions" type="number" name="portions" value="{{recipe.portions}}">
+</div>
+</div>
+
+
+  <h5> <label for="ingredients">Zutaten*</label> </h5>
+  <textarea rows="12" cols="0" id="zutaten" type="text" name="ingredients"
+    value="{{recipe.ingredients}}">{{recipe.ingredients}}</textarea>
+
+
+  <h5><label for="directions">Zubereitung*</label> </h5>
+
+  <textarea rows="12" cols="0" id="zubereitung" type="text" name="directions"
+    value="{{recipe.directions}}">{{recipe.directions}}</textarea>
+  
 <br>
+
+<p>*erforderliche Felder</p>
 
   <button id="btn-recipe-submit" type="submit">Rezept bearbeiten</button>
 </form>
 
+<br>
+<br>
 
-<form  action="/rezepte/{{this.id}}/entfernen" method="post"><button id="btn-rec-det" type="submit">Lösche das Rezept</button></form>
+
+
+<form action="/rezepte/{{this.id}}/entfernen" method="post"><button id="btn-rec-det" type="submit">Lösche das
+    Rezept</button></form>
 
 
 <a href="http://localhost:3000/rezepte"> zurück zur Rezeptübersicht</a>
+
+</div>

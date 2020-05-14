@@ -92,13 +92,75 @@ router.get('/verify-email-link/:token', (req, res) => {
 
 // willkommen-seite
 router.get('/willkommen', (req, res) => {
+
   const messages = req.flash('message');
   const verifiedEmail = req.user.verifiedEmail;
-  res.render('auth/personalized-page', {
-    user: req.user,
-    messages: messages,
-    verifiedEmail: verifiedEmail,
+
+  Recipe.find().then((data) => {
+    const filteredData = data.filter((recipe) => {
+      if (req.query.level && req.query.dishType && req.query.nutrition) {
+        return (
+          recipe.level === req.query.level &&
+          recipe.dishType === req.query.dishType &&
+          recipe.nutrition === req.query.nutrition
+        );
+      } else if (req.query.dishType && req.query.nutrition) {
+        return (
+          recipe.dishType === req.query.dishType &&
+          recipe.nutrition === req.query.nutrition
+        );
+      } else if (req.query.nutrition && req.query.level) {
+        return (
+          recipe.nutrition === req.query.nutrition &&
+          recipe.level === req.query.level
+        );
+      } else if (req.query.level && req.query.dishType) {
+        return (
+          recipe.level === req.query.level &&
+          recipe.dishType === req.query.dishType
+        );
+      } else if (req.query.level) {
+        return recipe.level === req.query.level;
+      } else if (req.query.nutrition) {
+        return recipe.nutrition === req.query.nutrition;
+      } else if (req.query.dishType) {
+        return recipe.dishType === req.query.dishType;
+      } else {
+        return recipe;
+      }
+
+    });
+
+    let recipeCounter = filteredData.length;
+
+    let uniqueNutrition = [];
+    data.forEach((recipe) => {
+      if (!uniqueNutrition.includes(recipe.nutrition)) {
+        uniqueNutrition.push(recipe.nutrition);
+      }
+    });
+
+    let uniqueDishtype = [];
+    data.forEach((recipe) => {
+      if (uniqueDishtype.includes(recipe.dishType) == false) {
+        uniqueDishtype.push(recipe.dishType);
+      }
+    });
+
+    res.render('auth/personalized-page', {
+      user: req.user,
+      messages: messages,
+      verifiedEmail: verifiedEmail,
+      recipes: filteredData,
+      count: recipeCounter,
+      nutrition: uniqueNutrition,
+      dishType: uniqueDishtype,
+    });
+
   });
+
+
+
 });
 
 router.get('/login', (req, res, next) => {

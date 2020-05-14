@@ -19,8 +19,6 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  {{!-- <a class="navbar-brand" href="#">HelloCook</a> --}}
-
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
      
@@ -31,21 +29,12 @@
        <li class="nav-item">
         <a class="nav-link" href="/rezepte/neu">Rezept hochladen</a>
       </li>
-
-         <li class="nav-item">
-        <a class="nav-link" href="/rezepte/neu">Favoriten</a>
-      </li>
-      {{!-- <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">New Recipes</a>
-      </li> --}}
     </ul>
        
      <form class="form-inline my-2 my-lg-0">
-      {{!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> --}}
-      <a class="btn my-2 my-sm-0" href="http://localhost:3000/login" type="submit">Login</a>
+      <a class="btn my-2 my-sm-0" id="btn-login" href="http://localhost:3000/login" type="submit">Login</a>
     </form>   
     <form class="form-inline my-2 my-lg-0">
-      {{!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> --}}
       <a class="btn my-2 my-sm-0" id="btn-register" href="/signup" type="submit">Registrieren</a>
     </form>
   </div>

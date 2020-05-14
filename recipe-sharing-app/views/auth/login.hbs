@@ -6,23 +6,19 @@
 
 
 <form action="/login" method="POST" id="form-container">
- <label for="email">E-Mail</label>
+ <label for="email"></label>
   <input id="email" type="email" name="email" placeholder="Email">
-  <br><br>
-  {{!-- <label for="username">Benutzername</label>
-  <input id="username" type="text" name="username" placeholder="Benutzername">
-  <br><br> --}}
-  <label for="password">Passwort</label>
+
+  <label for="password"></label>
   <input id="password" type="password" name="password" placeholder="Passwort">
 
-  <br><br>
 
-  <button type="submit">Anmelden</button>
+  <button type="submit" id="btn-form-login">Anmelden</button>
 <br>
 <a href="/auth/google">Anmelden mit Google</a> <br>
 
 <p>
-Neu bei HelloCook? <br><a href="/signup">Jetzt registrieren</a>
+Neu bei HelloCook? <a href="/signup">Jetzt registrieren</a>
   </p>
 </form>
 

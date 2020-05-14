@@ -1,16 +1,30 @@
+<div class="recipe-details">
 <h1>{{this.title}}</h1>
-<img src="{{this.image}}" alt="recipe-image" >
+
+<p>erstellt am {{this.created_at}} von "Username"</p>
+
+<div ><img src="{{this.image}}" alt="recipe-image" ></div>
 
 
 <div class="recipe-meta">
+      {{#if this.level}}
 <span> {{this.level}}</span>
+      {{/if}}
+
+      {{#if this.duration}}
 <span>Zubereitungszeit: {{this.duration}}</span>
-<span>{{this.cuisine}}</span>
-<span> {{this.dishType}}</span>
+      {{/if}}
+
+<span>{{this.dishType}}</span>
+
+      {{#if this.nutrition}}
+<span id="detail-nutrition"> {{this.nutrition}}</span>
+      {{/if}}
+
 
 </div>
 
-<div class="container">
+{{!-- <div class="container">
 <div class="row">
 <div class="col-xs-6 col-sm-3">
 <div class="like">
@@ -24,11 +38,19 @@
     </div>
 </div>
     </div>
-</div>
+</div> --}}
 {{!-- Bewertungen --}}
 
 {{!-- <h2>Zutaten: </h2> --}}
+      {{#if this.portions}}
+
 <h2>Zutaten für {{this.portions}} Personen:</h2>
+{{else}}
+<h2>Zutaten: </h2>
+
+
+{{/if}}
+
 {{#each this.ingredients }}
 <li>
     {{this}}
@@ -44,6 +66,7 @@
 {{/each}}
 
 
+
 {{!-- <p> Dieses Rezept wurde von {{this.author}} am {{created..}} erstellt. </p> --}}
 
 <a id="btn-rec-det" href='/rezepte/{{this.id}}/bearbeiten'> Bearbeite das Rezept</a>
@@ -52,12 +75,13 @@
 
 <a href="http://localhost:3000/rezepte"> zurück zur Rezeptübersicht</a>
 
+</div>
 
-<h2 id="comment-h2">Kommentare</h2>
+{{!-- <h2 id="comment-h2">Kommentare</h2>
 <form id="comment-form">
 <label for="comments"></label> </h5>
 
 <textarea rows="5" cols="0" id="comments" type="text" name="comments" placeholder="Verfasse deinen Kommentar zu diesem Rezept."></textarea>
 
 <button type="submit">Senden</button>
-</form>
+</form> --}}

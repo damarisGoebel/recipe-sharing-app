@@ -7,61 +7,70 @@ const uploadCloud = require('../config/cloudinary.js');
 
 //Show all recipes on recipe-overview
 router.get('/', (req, res, next) => {
-  console.log('req.query',req.query)
-
   // const level = req.query.level
   Recipe.find().then((data) => {
-    const filteredData = data.filter(recipe =>{
-
-      if (req.query.level && req.query.dishType && req.query.cuisine) {
-        return recipe.level === req.query.level && recipe.dishType === req.query.dishType && recipe.cuisine === req.query.cuisine;
-      } else if(req.query.dishType && req.query.cuisine){
-        return recipe.dishType === req.query.dishType && recipe.cuisine === req.query.cuisine;
-      } else if (req.query.cuisine && req.query.level) {
-          return recipe.cuisine === req.query.cuisine && recipe.level === req.query.level;
+    const filteredData = data.filter((recipe) => {
+      if (req.query.level && req.query.dishType && req.query.nutrition) {
+        return (
+          recipe.level === req.query.level &&
+          recipe.dishType === req.query.dishType &&
+          recipe.nutrition === req.query.nutrition
+        );
+      } else if (req.query.dishType && req.query.nutrition) {
+        return (
+          recipe.dishType === req.query.dishType &&
+          recipe.nutrition === req.query.nutrition
+        );
+      } else if (req.query.nutrition && req.query.level) {
+        return (
+          recipe.nutrition === req.query.nutrition &&
+          recipe.level === req.query.level
+        );
       } else if (req.query.level && req.query.dishType) {
-        return recipe.level === req.query.level && recipe.dishType === req.query.dishType;
-      } else if(req.query.level){
-        return recipe.level === req.query.level
-      } else if(req.query.cuisine){
-        return recipe.cuisine === req.query.cuisine
-      } else if(req.query.dishType){
-        return recipe.dishType === req.query.dishType
+        return (
+          recipe.level === req.query.level &&
+          recipe.dishType === req.query.dishType
+        );
+      } else if (req.query.level) {
+        return recipe.level === req.query.level;
+      } else if (req.query.nutrition) {
+        return recipe.nutrition === req.query.nutrition;
+      } else if (req.query.dishType) {
+        return recipe.dishType === req.query.dishType;
       } else {
         return recipe;
       }
 
-    //The following code does the same. It is called ternary operation.
+      //The following code does the same. It is called ternary operation.
       // return req.query.level? recipe.level === req.query.level: recipe;
     });
 
     let recipeCounter = filteredData.length;
 
-//TODO - apply all the filters before sending the data to the view
+    //TODO - apply all the filters before sending the data to the view
 
     // const result = words.filter(word => word.length > 6);
 
-
     // console.log('All my recipes:' + data + '========> recipeData');
-    let uniqueCuisine = [];
+    let uniqueNutrition = [];
     data.forEach((recipe) => {
-      if (!uniqueCuisine.includes(recipe.cuisine)) {
-        uniqueCuisine.push(recipe.cuisine);
+      if (!uniqueNutrition.includes(recipe.nutrition)) {
+        uniqueNutrition.push(recipe.nutrition);
       }
     });
 
     let uniqueDishtype = [];
     data.forEach((recipe) => {
-      if (uniqueDishtype.includes(recipe.dishType) == false ) {
-        uniqueDishtype.push(recipe.dishType)
+      if (uniqueDishtype.includes(recipe.dishType) == false) {
+        uniqueDishtype.push(recipe.dishType);
       }
-    })
+    });
     res.render('recipes/recipe-overview', {
       //The value you give to "recipes:" is the one that the view is going to receive
       recipes: filteredData,
       count: recipeCounter,
-      cuisine: uniqueCuisine,
-      dishType: uniqueDishtype
+      nutrition: uniqueNutrition,
+      dishType: uniqueDishtype,
     });
   });
 });
@@ -80,9 +89,9 @@ router.post('/', uploadCloud.single('photo'), (req, res, next) => {
     image = req.file.url;
   }
 
-  let ingredients = req.body.ingredients.split('\r'); // new line split
+  let ingredients = req.body.ingredients.split('\n'); // new line split
 
-  let directions = req.body.directions.split('\r'); // split new line
+  let directions = req.body.directions.split('\n'); // split new line
 
   let recipe = new Recipe({
     title: req.body.title,
@@ -90,7 +99,7 @@ router.post('/', uploadCloud.single('photo'), (req, res, next) => {
     ingredients: ingredients,
     directions: directions,
     level: req.body.level,
-    cuisine: req.body.cuisine,
+    nutrition: req.body.nutrition,
     portions: req.body.portions,
     dishType: req.body.dishType,
     duration: req.body.duration,
@@ -122,7 +131,21 @@ router.get('/:id', (req, res, next) => {
 // EDIT GET
 router.get('/:id/bearbeiten', (req, res, next) => {
   Recipe.findById(req.params.id)
-    .then((recipe) => {
+    .then((mongoRecipe) => {
+      console.log('mongoRecipe', mongoRecipe);
+      let recipe = {
+        title: mongoRecipe.title,
+        image: mongoRecipe.image ? mongoRecipe.image : '',
+        ingredients: mongoRecipe.ingredients.join('\n'),
+        directions: mongoRecipe.directions.join('\n'),
+        level: mongoRecipe.level,
+        nutrition: mongoRecipe.nutrition ? mongoRecipe.nutrition : '',
+        portions: mongoRecipe.portions ? mongoRecipe.portions : '',
+        dishType: mongoRecipe.dishType,
+        duration: mongoRecipe.duration ? mongoRecipe.duration : '',
+        id: req.params.id,
+      };
+      console.log('newRecipe', recipe);
       res.render('recipes/edit-recipe', { recipe });
     })
     .catch((error) => {
@@ -134,41 +157,59 @@ router.get('/:id/bearbeiten', (req, res, next) => {
 router.post('/:id/entfernen', (req, res) => {
   console.log(req.params.id);
 
-  Recipes.findByIdAndDelete(req.params.id).then(() => {
+  Recipe.findByIdAndDelete(req.params.id).then(() => {
     res.redirect('/rezepte');
   });
 });
 
 // EDIT POST
 
-router.post('/:id/bearbeiten', (req, res, next) => {
-  console.log('req.body', req.body);
+router.post(
+  '/:id/bearbeiten',
+  uploadCloud.single('photo'),
+  (req, res, next) => {
+    //console.log('req.body', req.body);
 
-  let image = '';
+    console.log('ingredients', req.body.ingredients);
+    //console.log('directions', req.body.directions);
 
-  if (req.file) {
-    image = req.file.url;
+    Recipe.findOne({ _id: req.params.id }, function (err, recipe) {
+      recipe.title = req.body.title;
+      recipe.image = req.file ? req.file.url : recipe.image;
+      recipe.ingredients = req.body.ingredients.split('\n');
+      recipe.directions = req.body.directions.split('\n');
+      recipe.level = req.body.level;
+      recipe.nutrition = req.body.nutrition;
+      recipe.portions = req.body.portions;
+      recipe.dishType = req.body.dishType;
+      recipe.duration = req.body.duration;
+      recipe.save(function (err) {
+        if (err) {
+          console.error('ERROR!', err);
+        }
+        res.redirect('/rezepte');
+      });
+    });
+
+    // let ingredients = req.body.ingredients.split('\r'); // new line split
+
+    // let directions = req.body.directions.split('\r'); // split new line
+
+    // Recipe.findByIdAndUpdate(req.params.id, {
+    //   title: req.body.title,
+    //   image: image,
+    //   ingredients: req.body.ingredients,
+    //   directions: req.body.directions,
+    //   level: req.body.level,
+    //   cuisine: req.body.cuisine,
+    //   portions: req.body.portions,
+    //   dishType: req.body.dishType,
+    //   duration: req.body.duration,
+    // })
+    //.then(() => {
+    //  res.redirect('/rezepte');
+    //});
   }
-
-  let ingredients = req.body.ingredients.split('\r'); // new line split
-
-  let directions = req.body.directions.split('\r'); // split new line
-
-
-  Recipe.findByIdAndUpdate(req.params.id, {
-    title: req.body.title,
-    image: image,
-    ingredients: ingredients,
-    directions: directions,
-    level: req.body.level,
-    cuisine: req.body.cuisine,
-    portions: req.body.portions,
-    dishType: req.body.dishType,
-    duration: req.body.duration,
-
-  }).then(() => {
-    res.redirect('/rezepte');
-  });
-});
+);
 
 module.exports = router;

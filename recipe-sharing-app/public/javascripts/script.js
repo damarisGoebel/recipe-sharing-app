@@ -16,12 +16,12 @@ function checkCuisine(cuisine) {
   return (cuisine = document.getElementById('cuisine').value);
 }
 
-function filterCuisine() {
-  console.log('filter cuisine function running ');
-  document.getElementById('filteredRecipes').innerHTML = recipes.filter(
-    checkCuisine
-  );
-}
+// function filterCuisine() {
+//   console.log('filter cuisine function running ');
+//   document.getElementById('filteredRecipes').innerHTML = recipes.filter(
+//     checkCuisine
+//   );
+// }
 
 // document
 //   .getElementById('rezepte-form')
