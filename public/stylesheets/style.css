@@ -92,7 +92,6 @@ a {
   width: 100%;
   background-position: center;
   min-height: 650px;
-  margin-top:50px;
 
   
 }
@@ -119,7 +118,9 @@ a {
 .home-headline h1 {
   margin:0px;
   padding:0px;
+  font-size:60px;
   text-align: center;
+  padding-bottom: 20px;
 }
 
 .sign-up {
@@ -132,11 +133,16 @@ a {
   font-size:35px;
 text-decoration: underline #537332;
 font-family: "AlianzaSlab700", "Georgia", "Droid Serif", serif;
-padding-bottom:20px;
+padding-bottom:30px;
 text-align: center;
 display: grid;
 
 
+}
+
+#home-signup-section {
+  padding-bottom: 60px;
+  background-color:white;
 }
 
 .sign-up-header {
@@ -163,13 +169,12 @@ h6 {
 
 #home-signup {
 padding-top: 34px;
-margin-bottom: 100px;
 text-align: center;
 }
 
 
 #btn-home-signup {
-color:#537332;
+/* color:#537332;
 border: 1px solid #537332;
 justify-content: center;
   padding: 10px 20px;
@@ -178,7 +183,18 @@ justify-content: center;
   margin-left:auto;
   width: 100%;
   height: 50px;
-  text-align: center;
+  text-align: center; */
+
+  background-color: #537332;
+  color: white;
+  justify-content: center;
+  padding: 15px 50px;
+  border-radius: 5px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  height: 50px;
+  text-transform: uppercase;
 }
 
 

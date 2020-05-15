@@ -94,7 +94,7 @@ router.post('/', uploadCloud.single('photo'), (req, res, next) => {
 
   let directions = req.body.directions.split('\n'); // split new line
 
-  let user = req.user.username;
+  let user = req.user;
   console.log('Das ist der User', user)
 
   let recipe = new Recipe({

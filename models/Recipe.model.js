@@ -12,7 +12,7 @@ const recipeSchema = new Schema(
     level: {
       type: String,
       enum: ['Easy Peasy', 'Amateur Chef', 'UltraPro Chef'],
-      required: true
+      required: true,
     },
 
     ingredients: {
@@ -51,13 +51,8 @@ const recipeSchema = new Schema(
     portions: Number,
 
     nutrition: {
-      type:String,
-      enum: [
-        'Vegan',
-        'Vegetarisch',
-        'Fleisch',
-        'Fisch'
-      ]
+      type: String,
+      enum: ['Vegan', 'Vegetarisch', 'Fleisch', 'Fisch'],
     },
 
     image: {
@@ -68,7 +63,7 @@ const recipeSchema = new Schema(
 
     duration: String,
 
-    author: String,
+    author: {},
   },
   {
     timestamps: {

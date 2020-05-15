@@ -1,30 +1,34 @@
+<div class="container">
+
 <div class="recipe-details">
-<h1>{{this.title}}</h1>
+      <h1>{{this.title}}</h1>
 
-<p>erstellt von {{this.author}}</p>
+{{#if this.author.username}}
+      <p>erstellt von {{this.author.username}}</p>
 
-<div ><img src="{{this.image}}" alt="recipe-image" ></div>
-
-
-<div class="recipe-meta">
-      {{#if this.level}}
-<span> {{this.level}}</span>
-      {{/if}}
-
-      {{#if this.duration}}
-<span>Zubereitungszeit: {{this.duration}}</span>
-      {{/if}}
-
-<span>{{this.dishType}}</span>
-
-      {{#if this.nutrition}}
-<span id="detail-nutrition"> {{this.nutrition}}</span>
-      {{/if}}
+{{/if}}
+      <div><img src="{{this.image}}" alt="recipe-image"></div>
 
 
-</div>
+      <div class="recipe-meta">
+            {{#if this.level}}
+            <span> {{this.level}}</span>
+            {{/if}}
 
-{{!-- <div class="container">
+            {{#if this.duration}}
+            <span>Zubereitungszeit: {{this.duration}}</span>
+            {{/if}}
+
+            <span>{{this.dishType}}</span>
+
+            {{#if this.nutrition}}
+            <span id="detail-nutrition"> {{this.nutrition}}</span>
+            {{/if}}
+
+
+      </div>
+
+      {{!-- <div class="container">
 <div class="row">
 <div class="col-xs-6 col-sm-3">
 <div class="like">
@@ -39,41 +43,44 @@
 </div>
     </div>
 </div> --}}
-{{!-- Bewertungen --}}
+      {{!-- Bewertungen --}}
 
-{{!-- <h2>Zutaten: </h2> --}}
+      {{!-- <h2>Zutaten: </h2> --}}
       {{#if this.portions}}
 
-<h2>Zutaten für {{this.portions}} Personen:</h2>
-{{else}}
-<h2>Zutaten: </h2>
+      <h2>Zutaten für {{this.portions}} Personen:</h2>
+      {{else}}
+      <h2>Zutaten: </h2>
 
 
-{{/if}}
+      {{/if}}
 
-{{#each this.ingredients }}
-<li>
-    {{this}}
-</li>
-    {{/each}}
-    {{!-- {{this.ingredients}}</span> --}}
+      {{#each this.ingredients }}
+      <li>
+            {{this}}
+      </li>
+      {{/each}}
+      {{!-- {{this.ingredients}}</span> --}}
 
-<h2>Zubereitung:</h2>
-{{#each this.directions}}
-<p>
-    {{this}}
-</p>
-{{/each}}
+      <h2>Zubereitung:</h2>
+      {{#each this.directions}}
+      <p>
+            {{this}}
+      </p>
+      {{/each}}
 
 
 
-{{!-- <p> Dieses Rezept wurde von {{this.author}} am {{created..}} erstellt. </p> --}}
+      {{!-- <p> Dieses Rezept wurde von {{this.author}} am {{created..}} erstellt. </p> --}}
 
-<a id="btn-rec-det" href='/rezepte/{{this.id}}/bearbeiten'> Bearbeite das Rezept</a>
+      <a id="btn-rec-det" href='/rezepte/{{this.id}}/bearbeiten'> Bearbeite das Rezept</a>
 
-<form  action="/rezepte/{{this.id}}/entfernen" method="post"><button id="btn-rec-det" type="submit">Lösche das Rezept</button></form>
+      <form action="/rezepte/{{this.id}}/entfernen" method="post"><button id="btn-rec-det" type="submit">Lösche das
+                  Rezept</button></form>
 
-<a href="http://localhost:3000/rezepte"> zurück zur Rezeptübersicht</a>
+      <a href="/rezepte"> zurück zur Rezeptübersicht</a>
+
+</div>
 
 </div>
 

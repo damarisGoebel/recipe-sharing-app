@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/User.model');
-const Recipe  = require('../models/Recipe.model')
+const Recipe = require('../models/Recipe.model');
 
 const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
@@ -56,8 +56,8 @@ router.post('/signup', (req, res, next) => {
       to: email,
       subject: 'Bitte bestätige deine Anmeldung',
       text: `Guten Tag, vielen Dank für deine Anmeldung. Wir freuen uns, dass wir dich bei HelloCook begrüßen dürfen!
-    Um Ihren Zugang zu bestätigen, klicken Sie einfach hier: http://localhost:3000/verify-email-link/${token}`,
-      html: `Um Ihren Zugang zu bestätigen, klicken Sie einfach: <a href="http://localhost:3000/verify-email-link/${token}">hier!</a>`,
+    Um Ihren Zugang zu bestätigen, klicken Sie einfach hier: ${process.env.EMAIL_LINK}${token}`,
+      html: `Um Ihren Zugang zu bestätigen, klicken Sie einfach: <a href="${process.env.EMAIL_LINK}${token}">hier!</a>`,
     })
     .then(() => {
       const salt = bcrypt.genSaltSync(bcryptSalt);
@@ -92,12 +92,10 @@ router.get('/verify-email-link/:token', (req, res) => {
 
 // willkommen-seite
 router.get('/willkommen', (req, res) => {
-
   const messages = req.flash('message');
   const verifiedEmail = req.user.verifiedEmail;
 
   Recipe.find().then((data) => {
-
     const filteredData = data.filter((recipe) => {
       if (req.query.level && req.query.dishType && req.query.nutrition) {
         return (
@@ -129,7 +127,6 @@ router.get('/willkommen', (req, res) => {
       } else {
         return recipe;
       }
-
     });
 
     let recipeCounter = filteredData.length;
@@ -148,8 +145,11 @@ router.get('/willkommen', (req, res) => {
       }
     });
 
+    let sortedRecipes = [...filteredData].sort((a,b) => { if (a.createdAt < b.createdAt) { return 1 } else { return -1 } })
+
     
 
+    console.log(sortedRecipes)
     // let sortedRecipes = Recipe.find().then((data) =>  {
     // }
     // )
@@ -162,12 +162,9 @@ router.get('/willkommen', (req, res) => {
       count: recipeCounter,
       nutrition: uniqueNutrition,
       dishType: uniqueDishtype,
+      
     });
-
   });
-
-
-
 });
 
 router.get('/login', (req, res, next) => {
@@ -184,7 +181,7 @@ router.post(
   })
 );
 
-router.get('/logout', function(req, res){
+router.get('/logout', function (req, res) {
   req.logout();
   res.redirect('/');
 });
