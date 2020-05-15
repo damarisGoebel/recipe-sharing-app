@@ -677,14 +677,19 @@ h5 {
   -webkit-font-smoothing: antialiased;
 }
 
-h3 span {
+h1 span {
   display: inline-block;
   font-weight: 400;
   font-size: 18px;
   margin: 0;
-
-
 }
+
+.karussell-section h2 {
+  background-color:#537332;
+  color:white;
+  padding: 0px 20px;
+}
+
 
 
 /*# sourceMappingURL=style.css.map */

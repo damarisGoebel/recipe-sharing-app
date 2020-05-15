@@ -145,9 +145,9 @@ router.get('/willkommen', (req, res) => {
       }
     });
 
-    let sortedRecipes = [...filteredData].sort((a,b) => { if (a.createdAt < b.createdAt) { return 1 } else { return -1 } })
+    let sortedRecipes = [...filteredData].sort((a,b) => { if (a.createdAt < b.createdAt) { return 1 } else { return -1 } }).slice(0,5)
 
-    
+
 
     console.log(sortedRecipes)
     // let sortedRecipes = Recipe.find().then((data) =>  {
@@ -162,7 +162,12 @@ router.get('/willkommen', (req, res) => {
       count: recipeCounter,
       nutrition: uniqueNutrition,
       dishType: uniqueDishtype,
-      
+      sortedRecipe1: sortedRecipes[0],
+      sortedRecipe2: sortedRecipes[1],
+      sortedRecipe3: sortedRecipes[2],
+      sortedRecipe4: sortedRecipes[3],
+      sortedRecipe5: sortedRecipes[4]
+
     });
   });
 });
