@@ -284,7 +284,7 @@ margin-top: 40px;
   color: #716d6a
 }
 
-#level, #cuisine, #dishType {
+#level, #nutrition, #dishType {
   border: 1px solid #476b2d;
   border-radius: 1px;
   height: 20px;
@@ -296,7 +296,7 @@ margin-top: 40px;
 
 }
 
-#cuisine:hover {
+#nutrition:hover {
   background-color: #c9d98f;
 
 }
@@ -668,7 +668,7 @@ h5 {
   margin-bottom: 100px;
 }
 
-.welcome-recipe-img{
+.welcome-recipe-img, .recipe-img{
   max-width: 100%;
 }
 
@@ -690,6 +690,87 @@ h1 span {
   padding: 0px 20px;
 }
 
+/* Media Query */
+@media only screen and (max-width: 600px){
 
+ .home-headline {
+   text-align:center;
+   width: 250px;
+ } 
+  .home-headline h1 {
+  font-size:40px;
+  }
+
+  .karussell-section h1 {
+    font-size:25px;
+  }
+
+  h1 {
+    font-size:25px;
+  }
+
+.welcome-page {
+  padding: 15px;
+}
+
+.karussell-section h2 {
+  font-size:20px;
+}
+
+.col-4 {
+  max-width:none;
+  padding:0px; 
+}
+
+.add-recipe, .edit-recipe {
+  padding: 10px 20px;
+}
+
+#rezepte-form .row {
+  margin-left: 0px;
+}
+
+#add-level, #add-duration, #add-gericht, #add-nutrition, #add-portions, #edit-level, #edit-duration, #edit-gericht, #edit-nutrition, #edit-portions {
+  width: 305px;
+}
+#btn-recipe-submit {
+  width: 100%;
+}
+.recipe-details {
+  padding: 10px 20px;
+}
+
+
+.recipe-meta > span {
+  padding: 5px 10px;
+  margin-bottom: 4px;
+  font-size: 16px;
+}
+
+.recipe-details h2 {
+  text-align:none;
+  font-size:20px;
+}
+
+.edit-recipe img {
+  max-width: 305px;
+}
+#rezepte {
+  margin-right: 0px;
+  margin-left:0px;
+}
+
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) { 
+  
+  
+   }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) { ... }
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) { ... }
 
 /*# sourceMappingURL=style.css.map */

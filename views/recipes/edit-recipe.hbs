@@ -5,7 +5,7 @@
 <h1>Bearbeite das Rezept</h1>
 
 
-<form action="/rezepte/{{recipe.id}}/bearbeiten" method="post" enctype="multipart/form-data">
+<form id="rezepte-form" action="/rezepte/{{recipe.id}}/bearbeiten" method="post" enctype="multipart/form-data">
   <h5><label for="title">Rezeptname*</label></h5>
   <input  id="title" type="text" name="title" value="{{recipe.title}}">
 
