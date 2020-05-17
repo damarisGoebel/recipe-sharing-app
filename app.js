@@ -20,7 +20,9 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./models/User.model');
 
 const MongoStore = require('connect-mongo')(session);
-const userTemplate = require('./config/user-template');
+
+// We don't require that anymore because it is set in the app.use(... )
+// const userTemplate = require('./config/user-template');
 
 mongoose
   .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
@@ -135,10 +137,17 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
-app.use(userTemplate)
+// This would separate the user-template.js from the app.js
+
+//app.use(userTemplate)
 // default value for title local
 app.locals.title = 'HelloCook';
-// app.locals.user = req.user;
+
+
+app.use((req, res, next ) => {
+  res.locals.user = req.user; 
+  next()
+})
 
 const index = require('./routes/index.routes');
 app.use('/', index);

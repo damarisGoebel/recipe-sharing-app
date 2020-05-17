@@ -9,6 +9,8 @@ const uploadCloud = require('../config/cloudinary.js');
 router.get('/', (req, res, next) => {
   // const level = req.query.level
   Recipe.find().then((data) => {
+
+    // Filter
     const filteredData = data.filter((recipe) => {
       if (req.query.level && req.query.dishType && req.query.nutrition) {
         return (
@@ -40,9 +42,7 @@ router.get('/', (req, res, next) => {
       } else {
         return recipe;
       }
-
-      //The following code does the same. It is called ternary operation.
-      // return req.query.level? recipe.level === req.query.level: recipe;
+    
     });
 
     let recipeCounter = filteredData.length;
@@ -65,6 +65,7 @@ router.get('/', (req, res, next) => {
         uniqueDishtype.push(recipe.dishType);
       }
     });
+
     res.render('recipes/recipe-overview', {
       //The value you give to "recipes:" is the one that the view is going to receive
       recipes: filteredData,
@@ -91,7 +92,6 @@ router.post('/', uploadCloud.single('photo'), (req, res, next) => {
   }
 
   let ingredients = req.body.ingredients.split('\n'); // new line split
-
   let directions = req.body.directions.split('\n'); // split new line
 
   let user = req.user;

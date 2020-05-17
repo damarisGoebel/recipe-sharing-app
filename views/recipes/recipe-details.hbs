@@ -73,10 +73,16 @@
 
       {{!-- <p> Dieses Rezept wurde von {{this.author}} am {{created..}} erstellt. </p> --}}
 
+
+      {{#if this.author}}
+
       <a id="btn-rec-det" href='/rezepte/{{this.id}}/bearbeiten'> Bearbeite das Rezept</a>
 
       <form action="/rezepte/{{this.id}}/entfernen" method="post"><button id="btn-rec-det" type="submit">Lösche das
                   Rezept</button></form>
+
+      {{/if}}
+
 
       <a href="/rezepte"> zurück zur Rezeptübersicht</a>
 
