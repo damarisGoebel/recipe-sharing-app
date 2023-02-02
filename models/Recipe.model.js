@@ -72,7 +72,6 @@ const recipeSchema = new Schema(
     },
   }
 
-  // author: [{ type: Schema.Types.ObjectId, ref: 'User' }], // username - based on the UserID .populate()
 
   // comments: [String]
 );

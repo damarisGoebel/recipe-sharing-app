@@ -5,15 +5,10 @@ const userSchema = new Schema(
   {
     email: String,
     username: String,
-    // email:  {type: mongoose.SchemaTypes.Email,
-    //     required: true},
-
     password: String,
-    googleID: String, 
+    googleID: String,
     verifiedEmail: { type: Boolean, default: false },
     token: String
-
-
   },
   {
     timestamps: {
@@ -21,8 +16,6 @@ const userSchema = new Schema(
       updatedAt: 'updated_at',
     },
   }
-
-  // favourites: [] // recipes-detail-pages
 );
 
 const User = mongoose.model('User', userSchema);

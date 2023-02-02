@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const favicon = require('serve-favicon');
-const hbs = require('hbs');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
@@ -20,9 +19,6 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./models/User.model');
 
 const MongoStore = require('connect-mongo')(session);
-
-// We don't require that anymore because it is set in the app.use(... )
-// const userTemplate = require('./config/user-template');
 
 mongoose
   .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
@@ -54,7 +50,8 @@ app.use(
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       resave: true,
-      saveUninitialized: false,
+      useUnifiedTopology: true,
+      saveUninitialized: true,
       ttl: 24 * 60 * 60, // 1 day
     }),
   })
@@ -137,15 +134,12 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
-// This would separate the user-template.js from the app.js
-
-//app.use(userTemplate)
 // default value for title local
 app.locals.title = 'HelloCook';
 
 
-app.use((req, res, next ) => {
-  res.locals.user = req.user; 
+app.use((req, res, next) => {
+  res.locals.user = req.user;
   next()
 })
 

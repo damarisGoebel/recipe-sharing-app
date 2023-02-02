@@ -8,17 +8,6 @@ const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 const passport = require('passport');
 
-const nodemailer = require('nodemailer');
-
-// SMTP
-let transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: {
-    user: 'tester123.peterpan@gmail.com',
-    pass: '89675rutitgzrvuz',
-  },
-});
-
 router.get('/signup', (req, res, next) => {
   res.render('auth/signup');
 });
@@ -50,50 +39,24 @@ router.post('/signup', (req, res, next) => {
   ); // [ 1, 4, 5, 8 ]
   const token = tokenArr.join(''); // "1458"
 
-  transporter
-    .sendMail({
-      from: '"Willkommen bei HelloCook " <myawesome@project.com>',
-      to: email,
-      subject: 'Bitte bestätige deine Anmeldung',
-      text: `Guten Tag, vielen Dank für deine Anmeldung. Wir freuen uns, dass wir dich bei HelloCook begrüßen dürfen!
-    Um Ihren Zugang zu bestätigen, klicken Sie einfach hier: ${process.env.EMAIL_LINK}${token}`,
-      html: `Um Ihren Zugang zu bestätigen, klicken Sie einfach: <a href="${process.env.EMAIL_LINK}${token}">hier!</a>`,
-    })
-    .then(() => {
-      const salt = bcrypt.genSaltSync(bcryptSalt);
-      const hashPass = bcrypt.hashSync(req.body.password, salt);
-      let user = new User({
-        email: req.body.email,
-        username: req.body.username,
-        password: hashPass,
-        token: token,
-      });
-      user.save().then(() => {
-        req.logIn(user, () => {
-          res.redirect('/willkommen');
-        });
-      });
-    });
-});
-
-router.get('/verify-email-link/:token', (req, res) => {
-  if (req.user.token === req.params.token) {
-    req.user.verifiedEmail = true;
-    req.user.save().then(() => {
-      // more professional : res.redirect and set a flash message before
-      req.flash(
-        'message',
-        'Super! Du hast deine E-Mail erfolgreich verifiziert.'
-      );
+  const salt = bcrypt.genSaltSync(bcryptSalt);
+  const hashPass = bcrypt.hashSync(req.body.password, salt);
+  let user = new User({
+    email: req.body.email,
+    username: req.body.username,
+    password: hashPass,
+    token: token,
+  });
+  user.save().then(() => {
+    req.logIn(user, () => {
       res.redirect('/willkommen');
     });
-  }
+  });
 });
 
 // willkommen-seite
 router.get('/willkommen', (req, res) => {
   const messages = req.flash('message');
-  const verifiedEmail = req.user.verifiedEmail;
 
   Recipe.find().then((data) => {
     const filteredData = data.filter((recipe) => {
@@ -145,19 +108,11 @@ router.get('/willkommen', (req, res) => {
       }
     });
 
-    let sortedRecipes = [...filteredData].sort((a,b) => { if (a.createdAt < b.createdAt) { return 1 } else { return -1 } }).slice(0,5)
-
-
-
-    console.log(sortedRecipes)
-    // let sortedRecipes = Recipe.find().then((data) =>  {
-    // }
-    // )
+    let sortedRecipes = [...filteredData].sort((a, b) => { if (a.createdAt < b.createdAt) { return 1 } else { return -1 } }).slice(0, 5)
 
     res.render('auth/personalized-page', {
       user: req.user,
       messages: messages,
-      verifiedEmail: verifiedEmail,
       recipes: filteredData,
       count: recipeCounter,
       nutrition: uniqueNutrition,

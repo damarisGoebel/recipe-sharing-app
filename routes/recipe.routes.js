@@ -7,10 +7,8 @@ const uploadCloud = require('../config/cloudinary.js');
 
 //Show all recipes on recipe-overview
 router.get('/', (req, res, next) => {
-  // const level = req.query.level
   Recipe.find().then((data) => {
 
-    // Filter
     const filteredData = data.filter((recipe) => {
       if (req.query.level && req.query.dishType && req.query.nutrition) {
         return (
@@ -42,16 +40,10 @@ router.get('/', (req, res, next) => {
       } else {
         return recipe;
       }
-    
+
     });
 
     let recipeCounter = filteredData.length;
-
-    //TODO - apply all the filters before sending the data to the view
-
-    // const result = words.filter(word => word.length > 6);
-
-    // console.log('All my recipes:' + data + '========> recipeData');
     let uniqueNutrition = [];
     data.forEach((recipe) => {
       if (!uniqueNutrition.includes(recipe.nutrition)) {
@@ -113,8 +105,6 @@ router.post('/', uploadCloud.single('photo'), (req, res, next) => {
   recipe
     .save()
     .then((recipe) => {
-      // console.log("recipe",recipe)
-      //res.redirect('/rezepte')
       res.redirect(`/rezepte/${recipe._id}`);
     })
 
@@ -126,8 +116,6 @@ router.post('/', uploadCloud.single('photo'), (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   Recipe.findById(req.params.id)
     .then((data) => {
-      // let date = data.created_at.toString().slice(0,10);
-      // console.log('date', date);
       res.render('recipes/recipe-details', data);
     })
     .catch((error) => {
@@ -170,16 +158,10 @@ router.post('/:id/entfernen', (req, res) => {
 });
 
 // EDIT POST
-
 router.post(
   '/:id/bearbeiten',
   uploadCloud.single('photo'),
   (req, res, next) => {
-    //console.log('req.body', req.body);
-
-    console.log('ingredients', req.body.ingredients);
-    //console.log('directions', req.body.directions);
-
     Recipe.findOne({ _id: req.params.id }, function (err, recipe) {
       recipe.title = req.body.title;
       recipe.image = req.file ? req.file.url : recipe.image;
@@ -197,25 +179,6 @@ router.post(
         res.redirect('/rezepte');
       });
     });
-
-    // let ingredients = req.body.ingredients.split('\r'); // new line split
-
-    // let directions = req.body.directions.split('\r'); // split new line
-
-    // Recipe.findByIdAndUpdate(req.params.id, {
-    //   title: req.body.title,
-    //   image: image,
-    //   ingredients: req.body.ingredients,
-    //   directions: req.body.directions,
-    //   level: req.body.level,
-    //   cuisine: req.body.cuisine,
-    //   portions: req.body.portions,
-    //   dishType: req.body.dishType,
-    //   duration: req.body.duration,
-    // })
-    //.then(() => {
-    //  res.redirect('/rezepte');
-    //});
   }
 );
 
