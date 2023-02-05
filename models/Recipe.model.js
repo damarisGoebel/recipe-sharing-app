@@ -72,8 +72,6 @@ const recipeSchema = new Schema(
     },
   }
 
-
-  // comments: [String]
 );
 
 const Recipe = mongoose.model('Recipe', recipeSchema);

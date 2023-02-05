@@ -3,7 +3,8 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
-const serverless = require('serverless-http');
+const exphbs = require("express-handlebars");
+
 const favicon = require('serve-favicon');
 const mongoose = require('mongoose');
 const logger = require('morgan');
@@ -38,6 +39,10 @@ const debug = require('debug')(
 );
 
 const app = express();
+
+const myhbs = exphbs.create({ helpers: { equal: function (a, b, options) { return (a == b) ? options.fn(this) : options.inverse(this) } } });
+app.engine("/", myhbs.engine);
+app.set("view engine", "hbs");
 
 // enables flash messages
 const flash = require('connect-flash');
@@ -122,6 +127,9 @@ passport.use(
   )
 );
 
+
+
+
 // Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -152,7 +160,5 @@ app.use('/', auth);
 
 const recipes = require('./routes/recipe.routes');
 app.use('/rezepte', recipes);
-app.use('/.netlify/functions/server', router);  // path must route to lambda (express/server.js)
 
 module.exports = app;
-module.exports.handler = serverless(app);
