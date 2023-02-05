@@ -3,7 +3,6 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
-const serverless = require('serverless-http');
 const favicon = require('serve-favicon');
 const mongoose = require('mongoose');
 const logger = require('morgan');
@@ -153,6 +152,4 @@ app.use('/', auth);
 const recipes = require('./routes/recipe.routes');
 app.use('/rezepte', recipes);
 
-// module.exports = app;
-
-module.exports.handler = serverless(app);
+module.exports = app;
