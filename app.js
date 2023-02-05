@@ -3,6 +3,7 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
+const serverless = require('serverless-http');
 const favicon = require('serve-favicon');
 const mongoose = require('mongoose');
 const logger = require('morgan');
@@ -151,5 +152,7 @@ app.use('/', auth);
 
 const recipes = require('./routes/recipe.routes');
 app.use('/rezepte', recipes);
+app.use('/.netlify/functions/server', router);  // path must route to lambda (express/server.js)
 
 module.exports = app;
+module.exports.handler = serverless(app);

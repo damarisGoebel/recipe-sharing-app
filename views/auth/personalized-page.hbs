@@ -1,91 +1,87 @@
-<div class="container">
+<div class='container'>
 
-  <div id="loggingout">
-
-    <img id="signout-img" src="/images/signout.svg" height="15px">
-    <a href="/logout">Abmelden</a>
-  </div>
-
-  <h2>Willkommen {{ user.username}} bei HelloCook</h2>
+  <h2>Willkommen {{user.username}} bei HelloCook</h2>
 
   {{#each messages}}
-  <p>{{this}}</p>
+    <p>{{this}}</p>
   {{/each}}
 
+  <div class='welcome-page'>
 
-
-  <div class="welcome-page">
-
-    <div class="karussell-section">
+    <div class='karussell-section'>
 
       <h1>Neueste Rezepte</h1>
 
-
-      {{!-- Karussell --}}
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      {{! Karussell }}
+      <div id='myCarousel' class='carousel slide' data-ride='carousel'>
         <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-          <li data-target="#myCarousel" data-slide-to="3"></li>
-          <li data-target="#myCarousel" data-slide-to="4"></li>
+        <ol class='carousel-indicators'>
+          <li data-target='#myCarousel' data-slide-to='0' class='active'></li>
+          <li data-target='#myCarousel' data-slide-to='1'></li>
+          <li data-target='#myCarousel' data-slide-to='2'></li>
+          <li data-target='#myCarousel' data-slide-to='3'></li>
+          <li data-target='#myCarousel' data-slide-to='4'></li>
         </ol>
 
         <!-- Wrapper for slides -->
-        <div class="carousel-inner">
+        <div class='carousel-inner'>
 
-          <div class="carousel-item active">
+          <div class='carousel-item active'>
 
-            <a href='/rezepte/{{sortedRecipe1.id}}' class="d-flex justify-content-center">
-              <img style='max-height: 500px; width: 100%; object-fit: contain' src="{{sortedRecipe1.image}}">
-              <div class="carousel-caption">
+            <a
+              href='/rezepte/{{sortedRecipe1.id}}'
+              class='d-flex justify-content-center'
+            >
+              <img
+                style='max-height: 500px; width: 100%; object-fit: contain'
+                src='{{sortedRecipe1.image}}'
+              />
+              <div class='carousel-caption'>
                 <h2>{{sortedRecipe1.title}}</h2>
               </div>
             </a>
 
-
           </div>
 
-          <div class="carousel-item">
+          <div class='carousel-item'>
 
             <a href='/rezepte/{{sortedRecipe2.id}}'>
 
-              <img class="d-block w-100" src="{{sortedRecipe2.image}}">
-              <div class="carousel-caption">
+              <img class='d-block w-100' src='{{sortedRecipe2.image}}' />
+              <div class='carousel-caption'>
                 <h2>{{sortedRecipe2.title}}</h2>
               </div>
             </a>
 
           </div>
 
-          <div class="carousel-item">
+          <div class='carousel-item'>
 
             <a href='/rezepte/{{sortedRecipe3.id}}'>
-              <img class="d-block w-100" src="{{sortedRecipe3.image}}">
-              <div class="carousel-caption">
+              <img class='d-block w-100' src='{{sortedRecipe3.image}}' />
+              <div class='carousel-caption'>
                 <h2>{{sortedRecipe3.title}}</h2>
               </div>
             </a>
           </div>
 
-          <div class="carousel-item">
+          <div class='carousel-item'>
 
             <a href='/rezepte/{{sortedRecipe4.id}}'>
 
-              <img class="d-block w-100" src="{{sortedRecipe4.image}}">
-              <div class="carousel-caption">
+              <img class='d-block w-100' src='{{sortedRecipe4.image}}' />
+              <div class='carousel-caption'>
                 <h2>{{sortedRecipe4.title}}</h2>
               </div>
 
             </a>
           </div>
 
-          <div class="carousel-item">
+          <div class='carousel-item'>
             <a href='/rezepte/{{sortedRecipe5.id}}'>
 
-              <img class="d-block w-100" src="{{sortedRecipe5.image}}">
-              <div class="carousel-caption">
+              <img class='d-block w-100' src='{{sortedRecipe5.image}}' />
+              <div class='carousel-caption'>
                 <h2>{{sortedRecipe5.title}}</h2>
               </div>
             </a>
@@ -95,122 +91,129 @@
 
         <!-- Left and right controls -->
 
-        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
+        <a
+          class='carousel-control-prev'
+          href='#myCarousel'
+          role='button'
+          data-slide='prev'
+        >
+          <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+          <span class='sr-only'>Previous</span>
         </a>
 
-        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
+        <a
+          class='carousel-control-next'
+          href='#myCarousel'
+          role='button'
+          data-slide='next'
+        >
+          <span class='carousel-control-next-icon' aria-hidden='true'></span>
+          <span class='sr-only'>Next</span>
         </a>
       </div>
     </div>
 
-    {{!-- karussel-section over --}}
+    {{! karussel-section over }}
 
+    <div class='all-recipes'>
 
+      <h1>Alle Rezepte<span id='counter'>&nbsp;&nbsp;({{count}}
+          Ergebnisse)</span></h1>
 
-    <div class="all-recipes">
+      {{! Filter }}
 
-      <h1>Alle Rezepte<span id="counter">&nbsp;&nbsp;({{count}} Ergebnisse)</span></h1>
-
-
-      {{!-- Filter --}}
-
-      <form action="/rezepte" method="get" id="filter-form">
-        <label for="level">Schwierigkeitsgrad</label>
-        <select id="level" name="level">
+      <form action='/rezepte' method='get' id='filter-form'>
+        <label for='level'>Schwierigkeitsgrad</label>
+        <select id='level' name='level'>
           <option value=''>Alle</option>
-          <option value="Easy Peasy">Easy Peasy</option>
-          <option value="Amateur Chef">Amateur Chef</option>
-          <option value="UltraPro Chef">UltraPro Chef</option>
+          <option value='Easy Peasy'>Easy Peasy</option>
+          <option value='Amateur Chef'>Amateur Chef</option>
+          <option value='UltraPro Chef'>UltraPro Chef</option>
 
         </select>
-        <label for="nutrition">Ernährung</label>
-        <select id="nutrition" name="nutrition">
+        <label for='nutrition'>Ernährung</label>
+        <select id='nutrition' name='nutrition'>
 
           <option value=''>Alle</option>
           {{#each nutrition}}
-          <option value="{{this}}">{{this}}</option>
+            <option value='{{this}}'>{{this}}</option>
           {{/each}}
 
         </select>
 
-        <label for="dishType">Gericht</label>
-        <select id="dishType" name="dishType">
+        <label for='dishType'>Gericht</label>
+        <select id='dishType' name='dishType'>
 
           <option value=''>Alle</option>
           {{#each dishType}}
-          <option value="{{this}}">{{this}}</option>
+            <option value='{{this}}'>{{this}}</option>
           {{/each}}
 
         </select>
 
-        {{!-- Here you can add as many filters as you want, the important thing is to name each one for example name =
-        'cuisine' --> This will give you access by doing req.query.cuisine--}}
-        <button type="submit" id="btn-filter">Filter</button>
+        {{! Here you can add as many filters as you want, the important thing is to name each one for example name =
+        'cuisine' --> This will give you access by doing req.query.cuisine}}
+        <button type='submit' id='btn-filter'>Filter</button>
       </form>
 
-      <br>
+      <br />
 
-      {{!-- Rezepteübersicht --}}
-      <div id="welcome-recipes" class="row">
-        {{!-- <div class="row align-items-start"> --}}
-          {{!-- <div class="col-4"> --}}
+      {{! Rezepteübersicht }}
+      <div id='welcome-recipes' class='row'>
+        {{! <div class="row align-items-start"> }}
+        {{! <div class="col-4"> }}
 
+        {{#each recipes}}
+          <div class='col-4'>
+            <div class='welcome-recipe-card'>
+              <div class='welcome-recipe-img'><img src='{{this.image}}' />
+              </div>
 
-            {{#each recipes}}
-            <div class="col-4">
-              <div class="welcome-recipe-card">
-                <div class="welcome-recipe-img"><img src="{{this.image}}"> </div>
+              <div class='recipe-text-field'>
+                <div class='recipe-txt'>
+                  <a href='/rezepte/{{this.id}}'> {{this.title}}</a>
+                </div>
 
-                <div class="recipe-text-field">
-                  <div class="recipe-txt">
-                    <a href='/rezepte/{{this.id}}'> {{this.title}}</a>
-                  </div>
+                {{#if this.duration}}
 
-                  {{#if this.duration}}
-
-                  <div class="recipe-duration recipe-txt">
+                  <div class='recipe-duration recipe-txt'>
                     <p> Zubereitungszeit: {{this.duration}} </p>
                   </div>
 
-                  {{/if}}
+                {{/if}}
 
-
-                  {{#if this.level}}
-                  <div class="recipe-level recipe-txt">
+                {{#if this.level}}
+                  <div class='recipe-level recipe-txt'>
                     <p> Schwierigkeitsgrad: {{this.level}} </p>
                   </div>
-                  {{/if}}
+                {{/if}}
 
-                  {{#if this.nutrition}}
+                {{#if this.nutrition}}
 
-                  <div class="recipe-nutrition">
+                  <div class='recipe-nutrition'>
                     <p>{{this.nutrition}}</p>
                   </div>
-                  {{/if}}
+                {{/if}}
 
-                </div>
               </div>
             </div>
-            {{/each}}
+          </div>
+        {{/each}}
 
-            {{!--
-          </div> --}}
-        </div>
-
+        {{!
+          </div> }}
       </div>
 
-      <br>
-
-      <a href='/rezepte/neu' id="last-paragraph"> Du hast eine gute Rezeptidee? Erstelle jetzt ein Rezept und
-        veröffentliche es auf HelloCook.</a>
-
-
-      {{!-- last welcome div --}}
     </div>
 
-    {{!-- last container div --}}
+    <br />
+
+    <a href='/rezepte/neu' id='last-paragraph'>
+      Du hast eine gute Rezeptidee? Erstelle jetzt ein Rezept und veröffentliche
+      es auf HelloCook.</a>
+
+    {{! last welcome div }}
   </div>
+
+  {{! last container div }}
+</div>
