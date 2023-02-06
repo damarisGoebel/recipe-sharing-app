@@ -3,7 +3,7 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
-const exphbs = require("express-handlebars");
+const hbs = require('hbs');
 
 const favicon = require('serve-favicon');
 const mongoose = require('mongoose');
@@ -38,11 +38,15 @@ const debug = require('debug')(
   `${app_name}:${path.basename(__filename).split('.')[0]}`
 );
 
+hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
+  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
 const app = express();
 
-const myhbs = exphbs.create({ helpers: { equal: function (a, b, options) { return (a == b) ? options.fn(this) : options.inverse(this) } } });
-app.engine("/", myhbs.engine);
-app.set("view engine", "hbs");
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
 // enables flash messages
 const flash = require('connect-flash');
